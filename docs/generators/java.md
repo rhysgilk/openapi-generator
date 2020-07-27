@@ -60,6 +60,7 @@ sidebar_label: java
 |useRxJava|Whether to use the RxJava adapter with the retrofit2 library. IMPORTANT: this option has been deprecated and will be removed in the 5.x release.| |false|
 |useRxJava2|Whether to use the RxJava2 adapter with the retrofit2 library.| |false|
 |useRxJava3|Whether to use the RxJava3 adapter with the retrofit2 library.| |false|
+|withAWSV4Signature|whether to include support for SigV4 signing| |false|
 |withXml|whether to include support for application/xml content type and include XML annotations in the model (works with libraries that provide support for JSON and XML)| |false|
 
 ## IMPORT MAPPING
