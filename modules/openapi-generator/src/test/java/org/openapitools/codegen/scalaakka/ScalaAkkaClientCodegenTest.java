@@ -369,7 +369,6 @@ public class ScalaAkkaClientCodegenTest {
         List<File> files = generator.opts(clientOptInput).generate();
 
         Assert.assertEquals(files.size(), 1);
-
         TestUtils.ensureContainsFile(files, output, "src/main/scala/hello/world/model/SomeObj.scala");
 
         File someObj = files.stream().filter(f -> f.getName().equals("SomeObj.scala"))
