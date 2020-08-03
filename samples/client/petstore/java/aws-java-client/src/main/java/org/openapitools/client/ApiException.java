@@ -14,7 +14,6 @@
 package org.openapitools.client;
 
 import java.util.Map;
-import java.util.List;
 
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class ApiException extends Exception {

@@ -13,18 +13,12 @@
 
 package org.openapitools.client.api;
 
-import org.openapitools.client.ApiCallback;
 import org.openapitools.client.ApiClient;
 import org.openapitools.client.ApiException;
-import org.openapitools.client.ApiResponse;
 import org.openapitools.client.Configuration;
 import org.openapitools.client.Pair;
-import org.openapitools.client.model.Response;
 
 
-import com.google.gson.reflect.TypeToken;
-
-import java.io.IOException;
 
 
 import org.openapitools.client.model.Order;
@@ -79,8 +73,7 @@ public class StoreApi {
     /**
      * Build call for deleteOrder
      * @param orderId ID of the order that needs to be deleted (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -89,7 +82,7 @@ public class StoreApi {
         <tr><td> 404 </td><td> Order not found </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response deleteOrderCall(String orderId, final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response deleteOrderCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/store/order/{order_id}"
             .replaceAll("\\{" + "order_id" + "\\}", localVarApiClient.escapeString(orderId.toString()));
@@ -118,7 +111,7 @@ public class StoreApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response deleteOrderValidateBeforeCall(String orderId, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response deleteOrderValidateBeforeCall() throws ApiException {
         
         // verify the required parameter 'orderId' is set
         if (orderId == null) {
@@ -126,7 +119,7 @@ public class StoreApi {
         }
         
 
-        com.amazonaws.Response localVarCall = deleteOrderCall(orderId, _callback);
+        com.amazonaws.Response localVarCall = deleteOrderCall();
         return localVarCall;
 
     }
@@ -151,7 +144,7 @@ public class StoreApi {
      * Delete purchase order by ID
      * For valid response try integer IDs with value &lt; 1000. Anything above 1000 or nonintegers will generate API errors
      * @param orderId ID of the order that needs to be deleted (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -160,15 +153,14 @@ public class StoreApi {
         <tr><td> 404 </td><td> Order not found </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> deleteOrderWithHttpInfo(String orderId) throws ApiException {
-        com.amazonaws.Response localVarCall = deleteOrderValidateBeforeCall(orderId, null);
-        return localVarApiClient.execute(localVarCall);
+    public com.amazonaws.Response deleteOrderWithHttpInfo(String orderId) throws ApiException {
+        com.amazonaws.Response localVarCall = deleteOrderValidateBeforeCall();
+        return localVarCall;
     }
 
     /**
      * Build call for getInventory
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -176,7 +168,7 @@ public class StoreApi {
         <tr><td> 200 </td><td> successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response getInventoryCall(final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response getInventoryCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/store/inventory";
         localVarApiClient.setPath(localVarPath);
@@ -204,10 +196,10 @@ public class StoreApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response getInventoryValidateBeforeCall(final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response getInventoryValidateBeforeCall() throws ApiException {
         
 
-        com.amazonaws.Response localVarCall = getInventoryCall(_callback);
+        com.amazonaws.Response localVarCall = getInventoryCall();
         return localVarCall;
 
     }
@@ -215,7 +207,7 @@ public class StoreApi {
     /**
      * Returns pet inventories by status
      * Returns a map of status codes to quantities
-     * @return Map&lt;String, Integer&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -223,15 +215,15 @@ public class StoreApi {
         <tr><td> 200 </td><td> successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public Map<String, Integer> getInventory() throws ApiException {
-        ApiResponse<Map<String, Integer>> localVarResp = getInventoryWithHttpInfo();
-        return localVarResp.getData();
+    public com.amazonaws.Response getInventory() throws ApiException {
+        com.amazonaws.Response localVarResp = getInventoryWithHttpInfo();
+        return localVarResp;
     }
 
     /**
      * Returns pet inventories by status
      * Returns a map of status codes to quantities
-     * @return ApiResponse&lt;Map&lt;String, Integer&gt;&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -239,17 +231,15 @@ public class StoreApi {
         <tr><td> 200 </td><td> successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Map<String, Integer>> getInventoryWithHttpInfo() throws ApiException {
-        com.amazonaws.Response localVarCall = getInventoryValidateBeforeCall(null);
-        Type localVarReturnType = new TypeToken<Map<String, Integer>>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    public com.amazonaws.Response getInventoryWithHttpInfo() throws ApiException {
+        com.amazonaws.Response localVarCall = getInventoryValidateBeforeCall();
+        return localVarCall;
     }
 
     /**
      * Build call for getOrderById
      * @param orderId ID of pet that needs to be fetched (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -259,7 +249,7 @@ public class StoreApi {
         <tr><td> 404 </td><td> Order not found </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response getOrderByIdCall(Long orderId, final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response getOrderByIdCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/store/order/{order_id}"
             .replaceAll("\\{" + "order_id" + "\\}", localVarApiClient.escapeString(orderId.toString()));
@@ -288,7 +278,7 @@ public class StoreApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response getOrderByIdValidateBeforeCall(Long orderId, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response getOrderByIdValidateBeforeCall() throws ApiException {
         
         // verify the required parameter 'orderId' is set
         if (orderId == null) {
@@ -296,7 +286,7 @@ public class StoreApi {
         }
         
 
-        com.amazonaws.Response localVarCall = getOrderByIdCall(orderId, _callback);
+        com.amazonaws.Response localVarCall = getOrderByIdCall();
         return localVarCall;
 
     }
@@ -305,7 +295,7 @@ public class StoreApi {
      * Find purchase order by ID
      * For valid response try integer IDs with value &lt;&#x3D; 5 or &gt; 10. Other values will generated exceptions
      * @param orderId ID of pet that needs to be fetched (required)
-     * @return Order
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -315,16 +305,16 @@ public class StoreApi {
         <tr><td> 404 </td><td> Order not found </td><td>  -  </td></tr>
      </table>
      */
-    public Order getOrderById(Long orderId) throws ApiException {
-        ApiResponse<Order> localVarResp = getOrderByIdWithHttpInfo(orderId);
-        return localVarResp.getData();
+    public com.amazonaws.Response getOrderById(Long orderId) throws ApiException {
+        com.amazonaws.Response localVarResp = getOrderByIdWithHttpInfo(orderId);
+        return localVarResp;
     }
 
     /**
      * Find purchase order by ID
      * For valid response try integer IDs with value &lt;&#x3D; 5 or &gt; 10. Other values will generated exceptions
      * @param orderId ID of pet that needs to be fetched (required)
-     * @return ApiResponse&lt;Order&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -334,17 +324,15 @@ public class StoreApi {
         <tr><td> 404 </td><td> Order not found </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Order> getOrderByIdWithHttpInfo(Long orderId) throws ApiException {
-        com.amazonaws.Response localVarCall = getOrderByIdValidateBeforeCall(orderId, null);
-        Type localVarReturnType = new TypeToken<Order>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    public com.amazonaws.Response getOrderByIdWithHttpInfo(Long orderId) throws ApiException {
+        com.amazonaws.Response localVarCall = getOrderByIdValidateBeforeCall();
+        return localVarCall;
     }
 
     /**
      * Build call for placeOrder
      * @param body order placed for purchasing the pet (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -353,7 +341,7 @@ public class StoreApi {
         <tr><td> 400 </td><td> Invalid Order </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response placeOrderCall(Order body, final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response placeOrderCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/store/order";
         localVarApiClient.setPath(localVarPath);
@@ -381,7 +369,7 @@ public class StoreApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response placeOrderValidateBeforeCall(Order body, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response placeOrderValidateBeforeCall() throws ApiException {
         
         // verify the required parameter 'body' is set
         if (body == null) {
@@ -389,7 +377,7 @@ public class StoreApi {
         }
         
 
-        com.amazonaws.Response localVarCall = placeOrderCall(body, _callback);
+        com.amazonaws.Response localVarCall = placeOrderCall();
         return localVarCall;
 
     }
@@ -398,7 +386,7 @@ public class StoreApi {
      * Place an order for a pet
      * 
      * @param body order placed for purchasing the pet (required)
-     * @return Order
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -407,16 +395,16 @@ public class StoreApi {
         <tr><td> 400 </td><td> Invalid Order </td><td>  -  </td></tr>
      </table>
      */
-    public Order placeOrder(Order body) throws ApiException {
-        ApiResponse<Order> localVarResp = placeOrderWithHttpInfo(body);
-        return localVarResp.getData();
+    public com.amazonaws.Response placeOrder(Order body) throws ApiException {
+        com.amazonaws.Response localVarResp = placeOrderWithHttpInfo(body);
+        return localVarResp;
     }
 
     /**
      * Place an order for a pet
      * 
      * @param body order placed for purchasing the pet (required)
-     * @return ApiResponse&lt;Order&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -425,10 +413,9 @@ public class StoreApi {
         <tr><td> 400 </td><td> Invalid Order </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Order> placeOrderWithHttpInfo(Order body) throws ApiException {
-        com.amazonaws.Response localVarCall = placeOrderValidateBeforeCall(body, null);
-        Type localVarReturnType = new TypeToken<Order>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    public com.amazonaws.Response placeOrderWithHttpInfo(Order body) throws ApiException {
+        com.amazonaws.Response localVarCall = placeOrderValidateBeforeCall();
+        return localVarCall;
     }
 
 }

@@ -2,21 +2,14 @@
 
 package {{package}};
 
-import {{invokerPackage}}.ApiCallback;
 import {{invokerPackage}}.ApiClient;
 import {{invokerPackage}}.ApiException;
-import {{invokerPackage}}.ApiResponse;
 import {{invokerPackage}}.Configuration;
 import {{invokerPackage}}.Pair;
-import {{invokerPackage}}.model.Response;
 
 {{#performBeanValidation}}
 import {{invokerPackage}}.BeanValidationException;
 {{/performBeanValidation}}
-
-import com.google.gson.reflect.TypeToken;
-
-import java.io.IOException;
 
 {{#useBeanValidation}}
 import javax.validation.constraints.*;
@@ -30,6 +23,7 @@ import java.util.Set;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 {{/performBeanValidation}}
+
 
 {{#imports}}import {{import}};
 {{/imports}}
@@ -88,8 +82,7 @@ public class {{classname}} {
     {{^vendorExtensions.x-group-parameters}}/**
      * Build call for {{operationId}}{{#allParams}}
      * @param {{paramName}} {{description}}{{#required}} (required){{/required}}{{^required}} (optional{{^isContainer}}{{#defaultValue}}, default to {{.}}{{/defaultValue}}{{/isContainer}}){{/required}}{{/allParams}}
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      {{#responses.0}}
      * @http.response.details
@@ -111,7 +104,7 @@ public class {{classname}} {
     {{#isDeprecated}}
     @Deprecated
     {{/isDeprecated}}
-    public{{/vendorExtensions.x-group-parameters}}{{#vendorExtensions.x-group-parameters}}private{{/vendorExtensions.x-group-parameters}} com.amazonaws.Response {{operationId}}Call({{#allParams}}{{{dataType}}} {{paramName}}, {{/allParams}}final ApiCallback _callback) throws ApiException {
+    public{{/vendorExtensions.x-group-parameters}}{{#vendorExtensions.x-group-parameters}}private{{/vendorExtensions.x-group-parameters}} com.amazonaws.Response {{operationId}}Call() throws ApiException {
         // create path and map variables
         String localVarPath = "{{{path}}}"{{#pathParams}}
             .replaceAll("\\{" + "{{baseName}}" + "\\}", localVarApiClient.escapeString({{#collectionFormat}}localVarApiClient.collectionPathParameterToString("{{{collectionFormat}}}", {{{paramName}}}){{/collectionFormat}}{{^collectionFormat}}{{{paramName}}}.toString(){{/collectionFormat}})){{/pathParams}};
@@ -148,7 +141,7 @@ public class {{classname}} {
     @Deprecated
     {{/isDeprecated}}
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response {{operationId}}ValidateBeforeCall({{#allParams}}{{{dataType}}} {{paramName}}, {{/allParams}}final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response {{operationId}}ValidateBeforeCall() throws ApiException {
         {{^performBeanValidation}}
         {{#allParams}}{{#required}}
         // verify the required parameter '{{paramName}}' is set
@@ -157,34 +150,8 @@ public class {{classname}} {
         }
         {{/required}}{{/allParams}}
 
-        com.amazonaws.Response localVarCall = {{operationId}}Call({{#allParams}}{{paramName}}, {{/allParams}}_callback);
+        com.amazonaws.Response localVarCall = {{operationId}}Call();
         return localVarCall;
-
-        {{/performBeanValidation}}
-        {{#performBeanValidation}}
-        try {
-            ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-            ExecutableValidator executableValidator = factory.getValidator().forExecutables();
-
-            Object[] parameterValues = { {{#allParams}}{{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}} };
-            Method method = this.getClass().getMethod("{{operationId}}WithHttpInfo"{{#allParams}}, {{#isListContainer}}java.util.List{{/isListContainer}}{{#isMapContainer}}java.util.Map{{/isMapContainer}}{{^isListContainer}}{{^isMapContainer}}{{{dataType}}}{{/isMapContainer}}{{/isListContainer}}.class{{/allParams}});
-            Set<ConstraintViolation<{{classname}}>> violations = executableValidator.validateParameters(this, method,
-                    parameterValues);
-
-            if (violations.size() == 0) {
-                com.amazonaws.Response localVarCall = {{operationId}}Call({{#allParams}}{{paramName}}, {{/allParams}}_callback);
-                return localVarCall;
-
-            } else {
-                throw new BeanValidationException((Set) violations);
-            }
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-            throw new ApiException(e.getMessage());
-        } catch (SecurityException e) {
-            e.printStackTrace();
-            throw new ApiException(e.getMessage());
-        }
 
         {{/performBeanValidation}}
     }
@@ -194,7 +161,7 @@ public class {{classname}} {
      * {{summary}}
      * {{notes}}{{#allParams}}
      * @param {{paramName}} {{description}}{{#required}} (required){{/required}}{{^required}} (optional{{^isContainer}}{{#defaultValue}}, default to {{.}}{{/defaultValue}}{{/isContainer}}){{/required}}{{/allParams}}{{#returnType}}
-     * @return {{returnType}}{{/returnType}}
+     * @return com.amazonaws.Response{{/returnType}}
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      {{#responses.0}}
      * @http.response.details
@@ -216,9 +183,9 @@ public class {{classname}} {
     {{#isDeprecated}}
     @Deprecated
     {{/isDeprecated}}
-    public {{#returnType}}{{{returnType}}} {{/returnType}}{{^returnType}}void {{/returnType}}{{operationId}}({{#allParams}}{{{dataType}}} {{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}}) throws ApiException {
-        {{#returnType}}ApiResponse<{{{returnType}}}> localVarResp = {{/returnType}}{{operationId}}WithHttpInfo({{#allParams}}{{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}});{{#returnType}}
-        return localVarResp.getData();{{/returnType}}
+    public {{#returnType}}com.amazonaws.Response {{/returnType}}{{^returnType}}void {{/returnType}}{{operationId}}({{#allParams}}{{{dataType}}} {{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}}) throws ApiException {
+        {{#returnType}}com.amazonaws.Response localVarResp = {{/returnType}}{{operationId}}WithHttpInfo({{#allParams}}{{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}});{{#returnType}}
+        return localVarResp;{{/returnType}}
     }
     {{/vendorExtensions.x-group-parameters}}
 
@@ -226,7 +193,7 @@ public class {{classname}} {
      * {{summary}}
      * {{notes}}{{#allParams}}
      * @param {{paramName}} {{description}}{{#required}} (required){{/required}}{{^required}} (optional{{^isContainer}}{{#defaultValue}}, default to {{.}}{{/defaultValue}}{{/isContainer}}){{/required}}{{/allParams}}
-     * @return ApiResponse&lt;{{#returnType}}{{returnType}}{{/returnType}}{{^returnType}}Void{{/returnType}}&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      {{#responses.0}}
      * @http.response.details
@@ -248,10 +215,9 @@ public class {{classname}} {
     {{#isDeprecated}}
     @Deprecated
     {{/isDeprecated}}
-    public{{/vendorExtensions.x-group-parameters}}{{#vendorExtensions.x-group-parameters}}private{{/vendorExtensions.x-group-parameters}} ApiResponse<{{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}Void{{/returnType}}> {{operationId}}WithHttpInfo({{#allParams}}{{#useBeanValidation}}{{>beanValidationQueryParams}}{{/useBeanValidation}}{{{dataType}}} {{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}}) throws ApiException {
-        com.amazonaws.Response localVarCall = {{operationId}}ValidateBeforeCall({{#allParams}}{{paramName}}, {{/allParams}}null);
-        {{#returnType}}Type localVarReturnType = new TypeToken<{{{returnType}}}>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);{{/returnType}}{{^returnType}}return localVarApiClient.execute(localVarCall);{{/returnType}}
+    public{{/vendorExtensions.x-group-parameters}}{{#vendorExtensions.x-group-parameters}}private{{/vendorExtensions.x-group-parameters}} com.amazonaws.Response {{operationId}}WithHttpInfo({{#allParams}}{{#useBeanValidation}}{{>beanValidationQueryParams}}{{/useBeanValidation}}{{{dataType}}} {{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}}) throws ApiException {
+        com.amazonaws.Response localVarCall = {{operationId}}ValidateBeforeCall();
+        return localVarCall;
     }
 
     {{#vendorExtensions.x-group-parameters}}
@@ -284,7 +250,6 @@ public class {{classname}} {
         {{/optionalParams}}
         /**
          * Build call for {{operationId}}
-         * @param _callback ApiCallback API callback
          * @return Call to execute
          * @throws ApiException If fail to serialize the request body object
          {{#responses.0}}
@@ -303,8 +268,8 @@ public class {{classname}} {
         {{#isDeprecated}}
         @Deprecated
         {{/isDeprecated}}
-        public com.amazonaws.Response buildCall(final ApiCallback _callback) throws ApiException {
-            return {{operationId}}Call({{#allParams}}{{paramName}}, {{/allParams}}_callback);
+        public com.amazonaws.Response buildCall() throws ApiException {
+            return {{operationId}}Call();
         }
 
         /**

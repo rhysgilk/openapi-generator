@@ -13,18 +13,12 @@
 
 package org.openapitools.client.api;
 
-import org.openapitools.client.ApiCallback;
 import org.openapitools.client.ApiClient;
 import org.openapitools.client.ApiException;
-import org.openapitools.client.ApiResponse;
 import org.openapitools.client.Configuration;
 import org.openapitools.client.Pair;
-import org.openapitools.client.model.Response;
 
 
-import com.google.gson.reflect.TypeToken;
-
-import java.io.IOException;
 
 
 import java.math.BigDecimal;
@@ -87,8 +81,7 @@ public class FakeApi {
     /**
      * Build call for createXmlItem
      * @param xmlItem XmlItem Body (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -96,7 +89,7 @@ public class FakeApi {
         <tr><td> 200 </td><td> successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response createXmlItemCall(XmlItem xmlItem, final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response createXmlItemCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/fake/create_xml_item";
         localVarApiClient.setPath(localVarPath);
@@ -124,7 +117,7 @@ public class FakeApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response createXmlItemValidateBeforeCall(XmlItem xmlItem, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response createXmlItemValidateBeforeCall() throws ApiException {
         
         // verify the required parameter 'xmlItem' is set
         if (xmlItem == null) {
@@ -132,7 +125,7 @@ public class FakeApi {
         }
         
 
-        com.amazonaws.Response localVarCall = createXmlItemCall(xmlItem, _callback);
+        com.amazonaws.Response localVarCall = createXmlItemCall();
         return localVarCall;
 
     }
@@ -156,7 +149,7 @@ public class FakeApi {
      * creates an XmlItem
      * this route creates an XmlItem
      * @param xmlItem XmlItem Body (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -164,16 +157,15 @@ public class FakeApi {
         <tr><td> 200 </td><td> successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> createXmlItemWithHttpInfo(XmlItem xmlItem) throws ApiException {
-        com.amazonaws.Response localVarCall = createXmlItemValidateBeforeCall(xmlItem, null);
-        return localVarApiClient.execute(localVarCall);
+    public com.amazonaws.Response createXmlItemWithHttpInfo(XmlItem xmlItem) throws ApiException {
+        com.amazonaws.Response localVarCall = createXmlItemValidateBeforeCall();
+        return localVarCall;
     }
 
     /**
      * Build call for fakeOuterBooleanSerialize
      * @param body Input boolean as post body (optional)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -181,7 +173,7 @@ public class FakeApi {
         <tr><td> 200 </td><td> Output boolean </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response fakeOuterBooleanSerializeCall(Boolean body, final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response fakeOuterBooleanSerializeCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/fake/outer/boolean";
         localVarApiClient.setPath(localVarPath);
@@ -209,10 +201,10 @@ public class FakeApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response fakeOuterBooleanSerializeValidateBeforeCall(Boolean body, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response fakeOuterBooleanSerializeValidateBeforeCall() throws ApiException {
         
 
-        com.amazonaws.Response localVarCall = fakeOuterBooleanSerializeCall(body, _callback);
+        com.amazonaws.Response localVarCall = fakeOuterBooleanSerializeCall();
         return localVarCall;
 
     }
@@ -221,7 +213,7 @@ public class FakeApi {
      * 
      * Test serialization of outer boolean types
      * @param body Input boolean as post body (optional)
-     * @return Boolean
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -229,16 +221,16 @@ public class FakeApi {
         <tr><td> 200 </td><td> Output boolean </td><td>  -  </td></tr>
      </table>
      */
-    public Boolean fakeOuterBooleanSerialize(Boolean body) throws ApiException {
-        ApiResponse<Boolean> localVarResp = fakeOuterBooleanSerializeWithHttpInfo(body);
-        return localVarResp.getData();
+    public com.amazonaws.Response fakeOuterBooleanSerialize(Boolean body) throws ApiException {
+        com.amazonaws.Response localVarResp = fakeOuterBooleanSerializeWithHttpInfo(body);
+        return localVarResp;
     }
 
     /**
      * 
      * Test serialization of outer boolean types
      * @param body Input boolean as post body (optional)
-     * @return ApiResponse&lt;Boolean&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -246,17 +238,15 @@ public class FakeApi {
         <tr><td> 200 </td><td> Output boolean </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Boolean> fakeOuterBooleanSerializeWithHttpInfo(Boolean body) throws ApiException {
-        com.amazonaws.Response localVarCall = fakeOuterBooleanSerializeValidateBeforeCall(body, null);
-        Type localVarReturnType = new TypeToken<Boolean>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    public com.amazonaws.Response fakeOuterBooleanSerializeWithHttpInfo(Boolean body) throws ApiException {
+        com.amazonaws.Response localVarCall = fakeOuterBooleanSerializeValidateBeforeCall();
+        return localVarCall;
     }
 
     /**
      * Build call for fakeOuterCompositeSerialize
      * @param body Input composite as post body (optional)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -264,7 +254,7 @@ public class FakeApi {
         <tr><td> 200 </td><td> Output composite </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response fakeOuterCompositeSerializeCall(OuterComposite body, final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response fakeOuterCompositeSerializeCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/fake/outer/composite";
         localVarApiClient.setPath(localVarPath);
@@ -292,10 +282,10 @@ public class FakeApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response fakeOuterCompositeSerializeValidateBeforeCall(OuterComposite body, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response fakeOuterCompositeSerializeValidateBeforeCall() throws ApiException {
         
 
-        com.amazonaws.Response localVarCall = fakeOuterCompositeSerializeCall(body, _callback);
+        com.amazonaws.Response localVarCall = fakeOuterCompositeSerializeCall();
         return localVarCall;
 
     }
@@ -304,7 +294,7 @@ public class FakeApi {
      * 
      * Test serialization of object with outer number type
      * @param body Input composite as post body (optional)
-     * @return OuterComposite
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -312,16 +302,16 @@ public class FakeApi {
         <tr><td> 200 </td><td> Output composite </td><td>  -  </td></tr>
      </table>
      */
-    public OuterComposite fakeOuterCompositeSerialize(OuterComposite body) throws ApiException {
-        ApiResponse<OuterComposite> localVarResp = fakeOuterCompositeSerializeWithHttpInfo(body);
-        return localVarResp.getData();
+    public com.amazonaws.Response fakeOuterCompositeSerialize(OuterComposite body) throws ApiException {
+        com.amazonaws.Response localVarResp = fakeOuterCompositeSerializeWithHttpInfo(body);
+        return localVarResp;
     }
 
     /**
      * 
      * Test serialization of object with outer number type
      * @param body Input composite as post body (optional)
-     * @return ApiResponse&lt;OuterComposite&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -329,17 +319,15 @@ public class FakeApi {
         <tr><td> 200 </td><td> Output composite </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<OuterComposite> fakeOuterCompositeSerializeWithHttpInfo(OuterComposite body) throws ApiException {
-        com.amazonaws.Response localVarCall = fakeOuterCompositeSerializeValidateBeforeCall(body, null);
-        Type localVarReturnType = new TypeToken<OuterComposite>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    public com.amazonaws.Response fakeOuterCompositeSerializeWithHttpInfo(OuterComposite body) throws ApiException {
+        com.amazonaws.Response localVarCall = fakeOuterCompositeSerializeValidateBeforeCall();
+        return localVarCall;
     }
 
     /**
      * Build call for fakeOuterNumberSerialize
      * @param body Input number as post body (optional)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -347,7 +335,7 @@ public class FakeApi {
         <tr><td> 200 </td><td> Output number </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response fakeOuterNumberSerializeCall(BigDecimal body, final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response fakeOuterNumberSerializeCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/fake/outer/number";
         localVarApiClient.setPath(localVarPath);
@@ -375,10 +363,10 @@ public class FakeApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response fakeOuterNumberSerializeValidateBeforeCall(BigDecimal body, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response fakeOuterNumberSerializeValidateBeforeCall() throws ApiException {
         
 
-        com.amazonaws.Response localVarCall = fakeOuterNumberSerializeCall(body, _callback);
+        com.amazonaws.Response localVarCall = fakeOuterNumberSerializeCall();
         return localVarCall;
 
     }
@@ -387,7 +375,7 @@ public class FakeApi {
      * 
      * Test serialization of outer number types
      * @param body Input number as post body (optional)
-     * @return BigDecimal
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -395,16 +383,16 @@ public class FakeApi {
         <tr><td> 200 </td><td> Output number </td><td>  -  </td></tr>
      </table>
      */
-    public BigDecimal fakeOuterNumberSerialize(BigDecimal body) throws ApiException {
-        ApiResponse<BigDecimal> localVarResp = fakeOuterNumberSerializeWithHttpInfo(body);
-        return localVarResp.getData();
+    public com.amazonaws.Response fakeOuterNumberSerialize(BigDecimal body) throws ApiException {
+        com.amazonaws.Response localVarResp = fakeOuterNumberSerializeWithHttpInfo(body);
+        return localVarResp;
     }
 
     /**
      * 
      * Test serialization of outer number types
      * @param body Input number as post body (optional)
-     * @return ApiResponse&lt;BigDecimal&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -412,17 +400,15 @@ public class FakeApi {
         <tr><td> 200 </td><td> Output number </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<BigDecimal> fakeOuterNumberSerializeWithHttpInfo(BigDecimal body) throws ApiException {
-        com.amazonaws.Response localVarCall = fakeOuterNumberSerializeValidateBeforeCall(body, null);
-        Type localVarReturnType = new TypeToken<BigDecimal>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    public com.amazonaws.Response fakeOuterNumberSerializeWithHttpInfo(BigDecimal body) throws ApiException {
+        com.amazonaws.Response localVarCall = fakeOuterNumberSerializeValidateBeforeCall();
+        return localVarCall;
     }
 
     /**
      * Build call for fakeOuterStringSerialize
      * @param body Input string as post body (optional)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -430,7 +416,7 @@ public class FakeApi {
         <tr><td> 200 </td><td> Output string </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response fakeOuterStringSerializeCall(String body, final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response fakeOuterStringSerializeCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/fake/outer/string";
         localVarApiClient.setPath(localVarPath);
@@ -458,10 +444,10 @@ public class FakeApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response fakeOuterStringSerializeValidateBeforeCall(String body, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response fakeOuterStringSerializeValidateBeforeCall() throws ApiException {
         
 
-        com.amazonaws.Response localVarCall = fakeOuterStringSerializeCall(body, _callback);
+        com.amazonaws.Response localVarCall = fakeOuterStringSerializeCall();
         return localVarCall;
 
     }
@@ -470,7 +456,7 @@ public class FakeApi {
      * 
      * Test serialization of outer string types
      * @param body Input string as post body (optional)
-     * @return String
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -478,16 +464,16 @@ public class FakeApi {
         <tr><td> 200 </td><td> Output string </td><td>  -  </td></tr>
      </table>
      */
-    public String fakeOuterStringSerialize(String body) throws ApiException {
-        ApiResponse<String> localVarResp = fakeOuterStringSerializeWithHttpInfo(body);
-        return localVarResp.getData();
+    public com.amazonaws.Response fakeOuterStringSerialize(String body) throws ApiException {
+        com.amazonaws.Response localVarResp = fakeOuterStringSerializeWithHttpInfo(body);
+        return localVarResp;
     }
 
     /**
      * 
      * Test serialization of outer string types
      * @param body Input string as post body (optional)
-     * @return ApiResponse&lt;String&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -495,17 +481,15 @@ public class FakeApi {
         <tr><td> 200 </td><td> Output string </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<String> fakeOuterStringSerializeWithHttpInfo(String body) throws ApiException {
-        com.amazonaws.Response localVarCall = fakeOuterStringSerializeValidateBeforeCall(body, null);
-        Type localVarReturnType = new TypeToken<String>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    public com.amazonaws.Response fakeOuterStringSerializeWithHttpInfo(String body) throws ApiException {
+        com.amazonaws.Response localVarCall = fakeOuterStringSerializeValidateBeforeCall();
+        return localVarCall;
     }
 
     /**
      * Build call for testBodyWithFileSchema
      * @param body  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -513,7 +497,7 @@ public class FakeApi {
         <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response testBodyWithFileSchemaCall(FileSchemaTestClass body, final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response testBodyWithFileSchemaCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/fake/body-with-file-schema";
         localVarApiClient.setPath(localVarPath);
@@ -541,7 +525,7 @@ public class FakeApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response testBodyWithFileSchemaValidateBeforeCall(FileSchemaTestClass body, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response testBodyWithFileSchemaValidateBeforeCall() throws ApiException {
         
         // verify the required parameter 'body' is set
         if (body == null) {
@@ -549,7 +533,7 @@ public class FakeApi {
         }
         
 
-        com.amazonaws.Response localVarCall = testBodyWithFileSchemaCall(body, _callback);
+        com.amazonaws.Response localVarCall = testBodyWithFileSchemaCall();
         return localVarCall;
 
     }
@@ -573,7 +557,7 @@ public class FakeApi {
      * 
      * For this test, the body for this request much reference a schema named &#x60;File&#x60;.
      * @param body  (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -581,17 +565,16 @@ public class FakeApi {
         <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> testBodyWithFileSchemaWithHttpInfo(FileSchemaTestClass body) throws ApiException {
-        com.amazonaws.Response localVarCall = testBodyWithFileSchemaValidateBeforeCall(body, null);
-        return localVarApiClient.execute(localVarCall);
+    public com.amazonaws.Response testBodyWithFileSchemaWithHttpInfo(FileSchemaTestClass body) throws ApiException {
+        com.amazonaws.Response localVarCall = testBodyWithFileSchemaValidateBeforeCall();
+        return localVarCall;
     }
 
     /**
      * Build call for testBodyWithQueryParams
      * @param query  (required)
      * @param body  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -599,7 +582,7 @@ public class FakeApi {
         <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response testBodyWithQueryParamsCall(String query, User body, final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response testBodyWithQueryParamsCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/fake/body-with-query-params";
         localVarApiClient.setPath(localVarPath);
@@ -627,7 +610,7 @@ public class FakeApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response testBodyWithQueryParamsValidateBeforeCall(String query, User body, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response testBodyWithQueryParamsValidateBeforeCall() throws ApiException {
         
         // verify the required parameter 'query' is set
         if (query == null) {
@@ -640,7 +623,7 @@ public class FakeApi {
         }
         
 
-        com.amazonaws.Response localVarCall = testBodyWithQueryParamsCall(query, body, _callback);
+        com.amazonaws.Response localVarCall = testBodyWithQueryParamsCall();
         return localVarCall;
 
     }
@@ -666,7 +649,7 @@ public class FakeApi {
      * 
      * @param query  (required)
      * @param body  (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -674,16 +657,15 @@ public class FakeApi {
         <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> testBodyWithQueryParamsWithHttpInfo(String query, User body) throws ApiException {
-        com.amazonaws.Response localVarCall = testBodyWithQueryParamsValidateBeforeCall(query, body, null);
-        return localVarApiClient.execute(localVarCall);
+    public com.amazonaws.Response testBodyWithQueryParamsWithHttpInfo(String query, User body) throws ApiException {
+        com.amazonaws.Response localVarCall = testBodyWithQueryParamsValidateBeforeCall();
+        return localVarCall;
     }
 
     /**
      * Build call for testClientModel
      * @param body client model (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -691,7 +673,7 @@ public class FakeApi {
         <tr><td> 200 </td><td> successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response testClientModelCall(Client body, final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response testClientModelCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/fake";
         localVarApiClient.setPath(localVarPath);
@@ -719,7 +701,7 @@ public class FakeApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response testClientModelValidateBeforeCall(Client body, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response testClientModelValidateBeforeCall() throws ApiException {
         
         // verify the required parameter 'body' is set
         if (body == null) {
@@ -727,7 +709,7 @@ public class FakeApi {
         }
         
 
-        com.amazonaws.Response localVarCall = testClientModelCall(body, _callback);
+        com.amazonaws.Response localVarCall = testClientModelCall();
         return localVarCall;
 
     }
@@ -736,7 +718,7 @@ public class FakeApi {
      * To test \&quot;client\&quot; model
      * To test \&quot;client\&quot; model
      * @param body client model (required)
-     * @return Client
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -744,16 +726,16 @@ public class FakeApi {
         <tr><td> 200 </td><td> successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public Client testClientModel(Client body) throws ApiException {
-        ApiResponse<Client> localVarResp = testClientModelWithHttpInfo(body);
-        return localVarResp.getData();
+    public com.amazonaws.Response testClientModel(Client body) throws ApiException {
+        com.amazonaws.Response localVarResp = testClientModelWithHttpInfo(body);
+        return localVarResp;
     }
 
     /**
      * To test \&quot;client\&quot; model
      * To test \&quot;client\&quot; model
      * @param body client model (required)
-     * @return ApiResponse&lt;Client&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -761,10 +743,9 @@ public class FakeApi {
         <tr><td> 200 </td><td> successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Client> testClientModelWithHttpInfo(Client body) throws ApiException {
-        com.amazonaws.Response localVarCall = testClientModelValidateBeforeCall(body, null);
-        Type localVarReturnType = new TypeToken<Client>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    public com.amazonaws.Response testClientModelWithHttpInfo(Client body) throws ApiException {
+        com.amazonaws.Response localVarCall = testClientModelValidateBeforeCall();
+        return localVarCall;
     }
 
     /**
@@ -783,8 +764,7 @@ public class FakeApi {
      * @param dateTime None (optional)
      * @param password None (optional)
      * @param paramCallback None (optional)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -793,7 +773,7 @@ public class FakeApi {
         <tr><td> 404 </td><td> User not found </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response testEndpointParametersCall(BigDecimal number, Double _double, String patternWithoutDelimiter, byte[] _byte, Integer integer, Integer int32, Long int64, Float _float, String string, File binary, LocalDate date, OffsetDateTime dateTime, String password, String paramCallback, final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response testEndpointParametersCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/fake";
         localVarApiClient.setPath(localVarPath);
@@ -821,7 +801,7 @@ public class FakeApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response testEndpointParametersValidateBeforeCall(BigDecimal number, Double _double, String patternWithoutDelimiter, byte[] _byte, Integer integer, Integer int32, Long int64, Float _float, String string, File binary, LocalDate date, OffsetDateTime dateTime, String password, String paramCallback, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response testEndpointParametersValidateBeforeCall() throws ApiException {
         
         // verify the required parameter 'number' is set
         if (number == null) {
@@ -844,7 +824,7 @@ public class FakeApi {
         }
         
 
-        com.amazonaws.Response localVarCall = testEndpointParametersCall(number, _double, patternWithoutDelimiter, _byte, integer, int32, int64, _float, string, binary, date, dateTime, password, paramCallback, _callback);
+        com.amazonaws.Response localVarCall = testEndpointParametersCall();
         return localVarCall;
 
     }
@@ -895,7 +875,7 @@ public class FakeApi {
      * @param dateTime None (optional)
      * @param password None (optional)
      * @param paramCallback None (optional)
-     * @return ApiResponse&lt;Void&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -904,9 +884,9 @@ public class FakeApi {
         <tr><td> 404 </td><td> User not found </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> testEndpointParametersWithHttpInfo(BigDecimal number, Double _double, String patternWithoutDelimiter, byte[] _byte, Integer integer, Integer int32, Long int64, Float _float, String string, File binary, LocalDate date, OffsetDateTime dateTime, String password, String paramCallback) throws ApiException {
-        com.amazonaws.Response localVarCall = testEndpointParametersValidateBeforeCall(number, _double, patternWithoutDelimiter, _byte, integer, int32, int64, _float, string, binary, date, dateTime, password, paramCallback, null);
-        return localVarApiClient.execute(localVarCall);
+    public com.amazonaws.Response testEndpointParametersWithHttpInfo(BigDecimal number, Double _double, String patternWithoutDelimiter, byte[] _byte, Integer integer, Integer int32, Long int64, Float _float, String string, File binary, LocalDate date, OffsetDateTime dateTime, String password, String paramCallback) throws ApiException {
+        com.amazonaws.Response localVarCall = testEndpointParametersValidateBeforeCall();
+        return localVarCall;
     }
 
     /**
@@ -919,8 +899,7 @@ public class FakeApi {
      * @param enumQueryDouble Query parameter enum test (double) (optional)
      * @param enumFormStringArray Form parameter enum test (string array) (optional)
      * @param enumFormString Form parameter enum test (string) (optional, default to -efg)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -929,7 +908,7 @@ public class FakeApi {
         <tr><td> 404 </td><td> Not found </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response testEnumParametersCall(List<String> enumHeaderStringArray, String enumHeaderString, List<String> enumQueryStringArray, String enumQueryString, Integer enumQueryInteger, Double enumQueryDouble, List<String> enumFormStringArray, String enumFormString, final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response testEnumParametersCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/fake";
         localVarApiClient.setPath(localVarPath);
@@ -963,10 +942,10 @@ public class FakeApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response testEnumParametersValidateBeforeCall(List<String> enumHeaderStringArray, String enumHeaderString, List<String> enumQueryStringArray, String enumQueryString, Integer enumQueryInteger, Double enumQueryDouble, List<String> enumFormStringArray, String enumFormString, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response testEnumParametersValidateBeforeCall() throws ApiException {
         
 
-        com.amazonaws.Response localVarCall = testEnumParametersCall(enumHeaderStringArray, enumHeaderString, enumQueryStringArray, enumQueryString, enumQueryInteger, enumQueryDouble, enumFormStringArray, enumFormString, _callback);
+        com.amazonaws.Response localVarCall = testEnumParametersCall();
         return localVarCall;
 
     }
@@ -1005,7 +984,7 @@ public class FakeApi {
      * @param enumQueryDouble Query parameter enum test (double) (optional)
      * @param enumFormStringArray Form parameter enum test (string array) (optional)
      * @param enumFormString Form parameter enum test (string) (optional, default to -efg)
-     * @return ApiResponse&lt;Void&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -1014,12 +993,12 @@ public class FakeApi {
         <tr><td> 404 </td><td> Not found </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> testEnumParametersWithHttpInfo(List<String> enumHeaderStringArray, String enumHeaderString, List<String> enumQueryStringArray, String enumQueryString, Integer enumQueryInteger, Double enumQueryDouble, List<String> enumFormStringArray, String enumFormString) throws ApiException {
-        com.amazonaws.Response localVarCall = testEnumParametersValidateBeforeCall(enumHeaderStringArray, enumHeaderString, enumQueryStringArray, enumQueryString, enumQueryInteger, enumQueryDouble, enumFormStringArray, enumFormString, null);
-        return localVarApiClient.execute(localVarCall);
+    public com.amazonaws.Response testEnumParametersWithHttpInfo(List<String> enumHeaderStringArray, String enumHeaderString, List<String> enumQueryStringArray, String enumQueryString, Integer enumQueryInteger, Double enumQueryDouble, List<String> enumFormStringArray, String enumFormString) throws ApiException {
+        com.amazonaws.Response localVarCall = testEnumParametersValidateBeforeCall();
+        return localVarCall;
     }
 
-    private com.amazonaws.Response testGroupParametersCall(Integer requiredStringGroup, Boolean requiredBooleanGroup, Long requiredInt64Group, Integer stringGroup, Boolean booleanGroup, Long int64Group, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response testGroupParametersCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/fake";
         localVarApiClient.setPath(localVarPath);
@@ -1053,7 +1032,7 @@ public class FakeApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response testGroupParametersValidateBeforeCall(Integer requiredStringGroup, Boolean requiredBooleanGroup, Long requiredInt64Group, Integer stringGroup, Boolean booleanGroup, Long int64Group, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response testGroupParametersValidateBeforeCall() throws ApiException {
         
         // verify the required parameter 'requiredStringGroup' is set
         if (requiredStringGroup == null) {
@@ -1071,15 +1050,15 @@ public class FakeApi {
         }
         
 
-        com.amazonaws.Response localVarCall = testGroupParametersCall(requiredStringGroup, requiredBooleanGroup, requiredInt64Group, stringGroup, booleanGroup, int64Group, _callback);
+        com.amazonaws.Response localVarCall = testGroupParametersCall();
         return localVarCall;
 
     }
 
 
-    private ApiResponse<Void> testGroupParametersWithHttpInfo(Integer requiredStringGroup, Boolean requiredBooleanGroup, Long requiredInt64Group, Integer stringGroup, Boolean booleanGroup, Long int64Group) throws ApiException {
-        com.amazonaws.Response localVarCall = testGroupParametersValidateBeforeCall(requiredStringGroup, requiredBooleanGroup, requiredInt64Group, stringGroup, booleanGroup, int64Group, null);
-        return localVarApiClient.execute(localVarCall);
+    private com.amazonaws.Response testGroupParametersWithHttpInfo(Integer requiredStringGroup, Boolean requiredBooleanGroup, Long requiredInt64Group, Integer stringGroup, Boolean booleanGroup, Long int64Group) throws ApiException {
+        com.amazonaws.Response localVarCall = testGroupParametersValidateBeforeCall();
+        return localVarCall;
     }
 
 
@@ -1129,7 +1108,6 @@ public class FakeApi {
 
         /**
          * Build call for testGroupParameters
-         * @param _callback ApiCallback API callback
          * @return Call to execute
          * @throws ApiException If fail to serialize the request body object
          * @http.response.details
@@ -1138,8 +1116,8 @@ public class FakeApi {
             <tr><td> 400 </td><td> Someting wrong </td><td>  -  </td></tr>
          </table>
          */
-        public com.amazonaws.Response buildCall(final ApiCallback _callback) throws ApiException {
-            return testGroupParametersCall(requiredStringGroup, requiredBooleanGroup, requiredInt64Group, stringGroup, booleanGroup, int64Group, _callback);
+        public com.amazonaws.Response buildCall() throws ApiException {
+            return testGroupParametersCall();
         }
 
         /**
@@ -1189,8 +1167,7 @@ public class FakeApi {
     /**
      * Build call for testInlineAdditionalProperties
      * @param param request body (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -1198,7 +1175,7 @@ public class FakeApi {
         <tr><td> 200 </td><td> successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response testInlineAdditionalPropertiesCall(Map<String, String> param, final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response testInlineAdditionalPropertiesCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/fake/inline-additionalProperties";
         localVarApiClient.setPath(localVarPath);
@@ -1226,7 +1203,7 @@ public class FakeApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response testInlineAdditionalPropertiesValidateBeforeCall(Map<String, String> param, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response testInlineAdditionalPropertiesValidateBeforeCall() throws ApiException {
         
         // verify the required parameter 'param' is set
         if (param == null) {
@@ -1234,7 +1211,7 @@ public class FakeApi {
         }
         
 
-        com.amazonaws.Response localVarCall = testInlineAdditionalPropertiesCall(param, _callback);
+        com.amazonaws.Response localVarCall = testInlineAdditionalPropertiesCall();
         return localVarCall;
 
     }
@@ -1258,7 +1235,7 @@ public class FakeApi {
      * test inline additionalProperties
      * 
      * @param param request body (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -1266,17 +1243,16 @@ public class FakeApi {
         <tr><td> 200 </td><td> successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> testInlineAdditionalPropertiesWithHttpInfo(Map<String, String> param) throws ApiException {
-        com.amazonaws.Response localVarCall = testInlineAdditionalPropertiesValidateBeforeCall(param, null);
-        return localVarApiClient.execute(localVarCall);
+    public com.amazonaws.Response testInlineAdditionalPropertiesWithHttpInfo(Map<String, String> param) throws ApiException {
+        com.amazonaws.Response localVarCall = testInlineAdditionalPropertiesValidateBeforeCall();
+        return localVarCall;
     }
 
     /**
      * Build call for testJsonFormData
      * @param param field1 (required)
      * @param param2 field2 (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -1284,7 +1260,7 @@ public class FakeApi {
         <tr><td> 200 </td><td> successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response testJsonFormDataCall(String param, String param2, final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response testJsonFormDataCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/fake/jsonFormData";
         localVarApiClient.setPath(localVarPath);
@@ -1312,7 +1288,7 @@ public class FakeApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response testJsonFormDataValidateBeforeCall(String param, String param2, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response testJsonFormDataValidateBeforeCall() throws ApiException {
         
         // verify the required parameter 'param' is set
         if (param == null) {
@@ -1325,7 +1301,7 @@ public class FakeApi {
         }
         
 
-        com.amazonaws.Response localVarCall = testJsonFormDataCall(param, param2, _callback);
+        com.amazonaws.Response localVarCall = testJsonFormDataCall();
         return localVarCall;
 
     }
@@ -1351,7 +1327,7 @@ public class FakeApi {
      * 
      * @param param field1 (required)
      * @param param2 field2 (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -1359,9 +1335,9 @@ public class FakeApi {
         <tr><td> 200 </td><td> successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> testJsonFormDataWithHttpInfo(String param, String param2) throws ApiException {
-        com.amazonaws.Response localVarCall = testJsonFormDataValidateBeforeCall(param, param2, null);
-        return localVarApiClient.execute(localVarCall);
+    public com.amazonaws.Response testJsonFormDataWithHttpInfo(String param, String param2) throws ApiException {
+        com.amazonaws.Response localVarCall = testJsonFormDataValidateBeforeCall();
+        return localVarCall;
     }
 
     /**
@@ -1371,8 +1347,7 @@ public class FakeApi {
      * @param http  (required)
      * @param url  (required)
      * @param context  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -1380,7 +1355,7 @@ public class FakeApi {
         <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response testQueryParameterCollectionFormatCall(List<String> pipe, List<String> ioutil, List<String> http, List<String> url, List<String> context, final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response testQueryParameterCollectionFormatCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/fake/test-query-paramters";
         localVarApiClient.setPath(localVarPath);
@@ -1408,7 +1383,7 @@ public class FakeApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response testQueryParameterCollectionFormatValidateBeforeCall(List<String> pipe, List<String> ioutil, List<String> http, List<String> url, List<String> context, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response testQueryParameterCollectionFormatValidateBeforeCall() throws ApiException {
         
         // verify the required parameter 'pipe' is set
         if (pipe == null) {
@@ -1436,7 +1411,7 @@ public class FakeApi {
         }
         
 
-        com.amazonaws.Response localVarCall = testQueryParameterCollectionFormatCall(pipe, ioutil, http, url, context, _callback);
+        com.amazonaws.Response localVarCall = testQueryParameterCollectionFormatCall();
         return localVarCall;
 
     }
@@ -1468,7 +1443,7 @@ public class FakeApi {
      * @param http  (required)
      * @param url  (required)
      * @param context  (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -1476,9 +1451,9 @@ public class FakeApi {
         <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> testQueryParameterCollectionFormatWithHttpInfo(List<String> pipe, List<String> ioutil, List<String> http, List<String> url, List<String> context) throws ApiException {
-        com.amazonaws.Response localVarCall = testQueryParameterCollectionFormatValidateBeforeCall(pipe, ioutil, http, url, context, null);
-        return localVarApiClient.execute(localVarCall);
+    public com.amazonaws.Response testQueryParameterCollectionFormatWithHttpInfo(List<String> pipe, List<String> ioutil, List<String> http, List<String> url, List<String> context) throws ApiException {
+        com.amazonaws.Response localVarCall = testQueryParameterCollectionFormatValidateBeforeCall();
+        return localVarCall;
     }
 
 }

@@ -13,18 +13,12 @@
 
 package org.openapitools.client.api;
 
-import org.openapitools.client.ApiCallback;
 import org.openapitools.client.ApiClient;
 import org.openapitools.client.ApiException;
-import org.openapitools.client.ApiResponse;
 import org.openapitools.client.Configuration;
 import org.openapitools.client.Pair;
-import org.openapitools.client.model.Response;
 
 
-import com.google.gson.reflect.TypeToken;
-
-import java.io.IOException;
 
 
 import java.io.File;
@@ -82,8 +76,7 @@ public class PetApi {
     /**
      * Build call for addPet
      * @param body Pet object that needs to be added to the store (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -92,7 +85,7 @@ public class PetApi {
         <tr><td> 405 </td><td> Invalid input </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response addPetCall(Pet body, final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response addPetCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/pet";
         localVarApiClient.setPath(localVarPath);
@@ -120,7 +113,7 @@ public class PetApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response addPetValidateBeforeCall(Pet body, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response addPetValidateBeforeCall() throws ApiException {
         
         // verify the required parameter 'body' is set
         if (body == null) {
@@ -128,7 +121,7 @@ public class PetApi {
         }
         
 
-        com.amazonaws.Response localVarCall = addPetCall(body, _callback);
+        com.amazonaws.Response localVarCall = addPetCall();
         return localVarCall;
 
     }
@@ -153,7 +146,7 @@ public class PetApi {
      * Add a new pet to the store
      * 
      * @param body Pet object that needs to be added to the store (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -162,17 +155,16 @@ public class PetApi {
         <tr><td> 405 </td><td> Invalid input </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> addPetWithHttpInfo(Pet body) throws ApiException {
-        com.amazonaws.Response localVarCall = addPetValidateBeforeCall(body, null);
-        return localVarApiClient.execute(localVarCall);
+    public com.amazonaws.Response addPetWithHttpInfo(Pet body) throws ApiException {
+        com.amazonaws.Response localVarCall = addPetValidateBeforeCall();
+        return localVarCall;
     }
 
     /**
      * Build call for deletePet
      * @param petId Pet id to delete (required)
      * @param apiKey  (optional)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -181,7 +173,7 @@ public class PetApi {
         <tr><td> 400 </td><td> Invalid pet value </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response deletePetCall(Long petId, String apiKey, final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response deletePetCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/pet/{petId}"
             .replaceAll("\\{" + "petId" + "\\}", localVarApiClient.escapeString(petId.toString()));
@@ -213,7 +205,7 @@ public class PetApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response deletePetValidateBeforeCall(Long petId, String apiKey, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response deletePetValidateBeforeCall() throws ApiException {
         
         // verify the required parameter 'petId' is set
         if (petId == null) {
@@ -221,7 +213,7 @@ public class PetApi {
         }
         
 
-        com.amazonaws.Response localVarCall = deletePetCall(petId, apiKey, _callback);
+        com.amazonaws.Response localVarCall = deletePetCall();
         return localVarCall;
 
     }
@@ -248,7 +240,7 @@ public class PetApi {
      * 
      * @param petId Pet id to delete (required)
      * @param apiKey  (optional)
-     * @return ApiResponse&lt;Void&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -257,16 +249,15 @@ public class PetApi {
         <tr><td> 400 </td><td> Invalid pet value </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> deletePetWithHttpInfo(Long petId, String apiKey) throws ApiException {
-        com.amazonaws.Response localVarCall = deletePetValidateBeforeCall(petId, apiKey, null);
-        return localVarApiClient.execute(localVarCall);
+    public com.amazonaws.Response deletePetWithHttpInfo(Long petId, String apiKey) throws ApiException {
+        com.amazonaws.Response localVarCall = deletePetValidateBeforeCall();
+        return localVarCall;
     }
 
     /**
      * Build call for findPetsByStatus
      * @param status Status values that need to be considered for filter (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -275,7 +266,7 @@ public class PetApi {
         <tr><td> 400 </td><td> Invalid status value </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response findPetsByStatusCall(List<String> status, final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response findPetsByStatusCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/pet/findByStatus";
         localVarApiClient.setPath(localVarPath);
@@ -303,7 +294,7 @@ public class PetApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response findPetsByStatusValidateBeforeCall(List<String> status, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response findPetsByStatusValidateBeforeCall() throws ApiException {
         
         // verify the required parameter 'status' is set
         if (status == null) {
@@ -311,7 +302,7 @@ public class PetApi {
         }
         
 
-        com.amazonaws.Response localVarCall = findPetsByStatusCall(status, _callback);
+        com.amazonaws.Response localVarCall = findPetsByStatusCall();
         return localVarCall;
 
     }
@@ -320,7 +311,7 @@ public class PetApi {
      * Finds Pets by status
      * Multiple status values can be provided with comma separated strings
      * @param status Status values that need to be considered for filter (required)
-     * @return List&lt;Pet&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -329,16 +320,16 @@ public class PetApi {
         <tr><td> 400 </td><td> Invalid status value </td><td>  -  </td></tr>
      </table>
      */
-    public List<Pet> findPetsByStatus(List<String> status) throws ApiException {
-        ApiResponse<List<Pet>> localVarResp = findPetsByStatusWithHttpInfo(status);
-        return localVarResp.getData();
+    public com.amazonaws.Response findPetsByStatus(List<String> status) throws ApiException {
+        com.amazonaws.Response localVarResp = findPetsByStatusWithHttpInfo(status);
+        return localVarResp;
     }
 
     /**
      * Finds Pets by status
      * Multiple status values can be provided with comma separated strings
      * @param status Status values that need to be considered for filter (required)
-     * @return ApiResponse&lt;List&lt;Pet&gt;&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -347,17 +338,15 @@ public class PetApi {
         <tr><td> 400 </td><td> Invalid status value </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<Pet>> findPetsByStatusWithHttpInfo(List<String> status) throws ApiException {
-        com.amazonaws.Response localVarCall = findPetsByStatusValidateBeforeCall(status, null);
-        Type localVarReturnType = new TypeToken<List<Pet>>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    public com.amazonaws.Response findPetsByStatusWithHttpInfo(List<String> status) throws ApiException {
+        com.amazonaws.Response localVarCall = findPetsByStatusValidateBeforeCall();
+        return localVarCall;
     }
 
     /**
      * Build call for findPetsByTags
      * @param tags Tags to filter by (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -368,7 +357,7 @@ public class PetApi {
      * @deprecated
      */
     @Deprecated
-    public com.amazonaws.Response findPetsByTagsCall(Set<String> tags, final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response findPetsByTagsCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/pet/findByTags";
         localVarApiClient.setPath(localVarPath);
@@ -397,7 +386,7 @@ public class PetApi {
 
     @Deprecated
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response findPetsByTagsValidateBeforeCall(Set<String> tags, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response findPetsByTagsValidateBeforeCall() throws ApiException {
         
         // verify the required parameter 'tags' is set
         if (tags == null) {
@@ -405,7 +394,7 @@ public class PetApi {
         }
         
 
-        com.amazonaws.Response localVarCall = findPetsByTagsCall(tags, _callback);
+        com.amazonaws.Response localVarCall = findPetsByTagsCall();
         return localVarCall;
 
     }
@@ -414,7 +403,7 @@ public class PetApi {
      * Finds Pets by tags
      * Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.
      * @param tags Tags to filter by (required)
-     * @return Set&lt;Pet&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -425,16 +414,16 @@ public class PetApi {
      * @deprecated
      */
     @Deprecated
-    public Set<Pet> findPetsByTags(Set<String> tags) throws ApiException {
-        ApiResponse<Set<Pet>> localVarResp = findPetsByTagsWithHttpInfo(tags);
-        return localVarResp.getData();
+    public com.amazonaws.Response findPetsByTags(Set<String> tags) throws ApiException {
+        com.amazonaws.Response localVarResp = findPetsByTagsWithHttpInfo(tags);
+        return localVarResp;
     }
 
     /**
      * Finds Pets by tags
      * Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.
      * @param tags Tags to filter by (required)
-     * @return ApiResponse&lt;Set&lt;Pet&gt;&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -445,17 +434,15 @@ public class PetApi {
      * @deprecated
      */
     @Deprecated
-    public ApiResponse<Set<Pet>> findPetsByTagsWithHttpInfo(Set<String> tags) throws ApiException {
-        com.amazonaws.Response localVarCall = findPetsByTagsValidateBeforeCall(tags, null);
-        Type localVarReturnType = new TypeToken<Set<Pet>>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    public com.amazonaws.Response findPetsByTagsWithHttpInfo(Set<String> tags) throws ApiException {
+        com.amazonaws.Response localVarCall = findPetsByTagsValidateBeforeCall();
+        return localVarCall;
     }
 
     /**
      * Build call for getPetById
      * @param petId ID of pet to return (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -465,7 +452,7 @@ public class PetApi {
         <tr><td> 404 </td><td> Pet not found </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response getPetByIdCall(Long petId, final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response getPetByIdCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/pet/{petId}"
             .replaceAll("\\{" + "petId" + "\\}", localVarApiClient.escapeString(petId.toString()));
@@ -494,7 +481,7 @@ public class PetApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response getPetByIdValidateBeforeCall(Long petId, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response getPetByIdValidateBeforeCall() throws ApiException {
         
         // verify the required parameter 'petId' is set
         if (petId == null) {
@@ -502,7 +489,7 @@ public class PetApi {
         }
         
 
-        com.amazonaws.Response localVarCall = getPetByIdCall(petId, _callback);
+        com.amazonaws.Response localVarCall = getPetByIdCall();
         return localVarCall;
 
     }
@@ -511,7 +498,7 @@ public class PetApi {
      * Find pet by ID
      * Returns a single pet
      * @param petId ID of pet to return (required)
-     * @return Pet
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -521,16 +508,16 @@ public class PetApi {
         <tr><td> 404 </td><td> Pet not found </td><td>  -  </td></tr>
      </table>
      */
-    public Pet getPetById(Long petId) throws ApiException {
-        ApiResponse<Pet> localVarResp = getPetByIdWithHttpInfo(petId);
-        return localVarResp.getData();
+    public com.amazonaws.Response getPetById(Long petId) throws ApiException {
+        com.amazonaws.Response localVarResp = getPetByIdWithHttpInfo(petId);
+        return localVarResp;
     }
 
     /**
      * Find pet by ID
      * Returns a single pet
      * @param petId ID of pet to return (required)
-     * @return ApiResponse&lt;Pet&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -540,17 +527,15 @@ public class PetApi {
         <tr><td> 404 </td><td> Pet not found </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Pet> getPetByIdWithHttpInfo(Long petId) throws ApiException {
-        com.amazonaws.Response localVarCall = getPetByIdValidateBeforeCall(petId, null);
-        Type localVarReturnType = new TypeToken<Pet>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    public com.amazonaws.Response getPetByIdWithHttpInfo(Long petId) throws ApiException {
+        com.amazonaws.Response localVarCall = getPetByIdValidateBeforeCall();
+        return localVarCall;
     }
 
     /**
      * Build call for updatePet
      * @param body Pet object that needs to be added to the store (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -561,7 +546,7 @@ public class PetApi {
         <tr><td> 405 </td><td> Validation exception </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response updatePetCall(Pet body, final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response updatePetCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/pet";
         localVarApiClient.setPath(localVarPath);
@@ -589,7 +574,7 @@ public class PetApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response updatePetValidateBeforeCall(Pet body, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response updatePetValidateBeforeCall() throws ApiException {
         
         // verify the required parameter 'body' is set
         if (body == null) {
@@ -597,7 +582,7 @@ public class PetApi {
         }
         
 
-        com.amazonaws.Response localVarCall = updatePetCall(body, _callback);
+        com.amazonaws.Response localVarCall = updatePetCall();
         return localVarCall;
 
     }
@@ -624,7 +609,7 @@ public class PetApi {
      * Update an existing pet
      * 
      * @param body Pet object that needs to be added to the store (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -635,9 +620,9 @@ public class PetApi {
         <tr><td> 405 </td><td> Validation exception </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> updatePetWithHttpInfo(Pet body) throws ApiException {
-        com.amazonaws.Response localVarCall = updatePetValidateBeforeCall(body, null);
-        return localVarApiClient.execute(localVarCall);
+    public com.amazonaws.Response updatePetWithHttpInfo(Pet body) throws ApiException {
+        com.amazonaws.Response localVarCall = updatePetValidateBeforeCall();
+        return localVarCall;
     }
 
     /**
@@ -645,8 +630,7 @@ public class PetApi {
      * @param petId ID of pet that needs to be updated (required)
      * @param name Updated name of the pet (optional)
      * @param status Updated status of the pet (optional)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -654,7 +638,7 @@ public class PetApi {
         <tr><td> 405 </td><td> Invalid input </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response updatePetWithFormCall(Long petId, String name, String status, final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response updatePetWithFormCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/pet/{petId}"
             .replaceAll("\\{" + "petId" + "\\}", localVarApiClient.escapeString(petId.toString()));
@@ -683,7 +667,7 @@ public class PetApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response updatePetWithFormValidateBeforeCall(Long petId, String name, String status, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response updatePetWithFormValidateBeforeCall() throws ApiException {
         
         // verify the required parameter 'petId' is set
         if (petId == null) {
@@ -691,7 +675,7 @@ public class PetApi {
         }
         
 
-        com.amazonaws.Response localVarCall = updatePetWithFormCall(petId, name, status, _callback);
+        com.amazonaws.Response localVarCall = updatePetWithFormCall();
         return localVarCall;
 
     }
@@ -719,7 +703,7 @@ public class PetApi {
      * @param petId ID of pet that needs to be updated (required)
      * @param name Updated name of the pet (optional)
      * @param status Updated status of the pet (optional)
-     * @return ApiResponse&lt;Void&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -727,9 +711,9 @@ public class PetApi {
         <tr><td> 405 </td><td> Invalid input </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> updatePetWithFormWithHttpInfo(Long petId, String name, String status) throws ApiException {
-        com.amazonaws.Response localVarCall = updatePetWithFormValidateBeforeCall(petId, name, status, null);
-        return localVarApiClient.execute(localVarCall);
+    public com.amazonaws.Response updatePetWithFormWithHttpInfo(Long petId, String name, String status) throws ApiException {
+        com.amazonaws.Response localVarCall = updatePetWithFormValidateBeforeCall();
+        return localVarCall;
     }
 
     /**
@@ -737,8 +721,7 @@ public class PetApi {
      * @param petId ID of pet to update (required)
      * @param additionalMetadata Additional data to pass to server (optional)
      * @param file file to upload (optional)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -746,7 +729,7 @@ public class PetApi {
         <tr><td> 200 </td><td> successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response uploadFileCall(Long petId, String additionalMetadata, File file, final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response uploadFileCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/pet/{petId}/uploadImage"
             .replaceAll("\\{" + "petId" + "\\}", localVarApiClient.escapeString(petId.toString()));
@@ -775,7 +758,7 @@ public class PetApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response uploadFileValidateBeforeCall(Long petId, String additionalMetadata, File file, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response uploadFileValidateBeforeCall() throws ApiException {
         
         // verify the required parameter 'petId' is set
         if (petId == null) {
@@ -783,7 +766,7 @@ public class PetApi {
         }
         
 
-        com.amazonaws.Response localVarCall = uploadFileCall(petId, additionalMetadata, file, _callback);
+        com.amazonaws.Response localVarCall = uploadFileCall();
         return localVarCall;
 
     }
@@ -794,7 +777,7 @@ public class PetApi {
      * @param petId ID of pet to update (required)
      * @param additionalMetadata Additional data to pass to server (optional)
      * @param file file to upload (optional)
-     * @return ModelApiResponse
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -802,9 +785,9 @@ public class PetApi {
         <tr><td> 200 </td><td> successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public ModelApiResponse uploadFile(Long petId, String additionalMetadata, File file) throws ApiException {
-        ApiResponse<ModelApiResponse> localVarResp = uploadFileWithHttpInfo(petId, additionalMetadata, file);
-        return localVarResp.getData();
+    public com.amazonaws.Response uploadFile(Long petId, String additionalMetadata, File file) throws ApiException {
+        com.amazonaws.Response localVarResp = uploadFileWithHttpInfo(petId, additionalMetadata, file);
+        return localVarResp;
     }
 
     /**
@@ -813,7 +796,7 @@ public class PetApi {
      * @param petId ID of pet to update (required)
      * @param additionalMetadata Additional data to pass to server (optional)
      * @param file file to upload (optional)
-     * @return ApiResponse&lt;ModelApiResponse&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -821,10 +804,9 @@ public class PetApi {
         <tr><td> 200 </td><td> successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ModelApiResponse> uploadFileWithHttpInfo(Long petId, String additionalMetadata, File file) throws ApiException {
-        com.amazonaws.Response localVarCall = uploadFileValidateBeforeCall(petId, additionalMetadata, file, null);
-        Type localVarReturnType = new TypeToken<ModelApiResponse>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    public com.amazonaws.Response uploadFileWithHttpInfo(Long petId, String additionalMetadata, File file) throws ApiException {
+        com.amazonaws.Response localVarCall = uploadFileValidateBeforeCall();
+        return localVarCall;
     }
 
     /**
@@ -832,8 +814,7 @@ public class PetApi {
      * @param petId ID of pet to update (required)
      * @param requiredFile file to upload (required)
      * @param additionalMetadata Additional data to pass to server (optional)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -841,7 +822,7 @@ public class PetApi {
         <tr><td> 200 </td><td> successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response uploadFileWithRequiredFileCall(Long petId, File requiredFile, String additionalMetadata, final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response uploadFileWithRequiredFileCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/fake/{petId}/uploadImageWithRequiredFile"
             .replaceAll("\\{" + "petId" + "\\}", localVarApiClient.escapeString(petId.toString()));
@@ -870,7 +851,7 @@ public class PetApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response uploadFileWithRequiredFileValidateBeforeCall(Long petId, File requiredFile, String additionalMetadata, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response uploadFileWithRequiredFileValidateBeforeCall() throws ApiException {
         
         // verify the required parameter 'petId' is set
         if (petId == null) {
@@ -883,7 +864,7 @@ public class PetApi {
         }
         
 
-        com.amazonaws.Response localVarCall = uploadFileWithRequiredFileCall(petId, requiredFile, additionalMetadata, _callback);
+        com.amazonaws.Response localVarCall = uploadFileWithRequiredFileCall();
         return localVarCall;
 
     }
@@ -894,7 +875,7 @@ public class PetApi {
      * @param petId ID of pet to update (required)
      * @param requiredFile file to upload (required)
      * @param additionalMetadata Additional data to pass to server (optional)
-     * @return ModelApiResponse
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -902,9 +883,9 @@ public class PetApi {
         <tr><td> 200 </td><td> successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public ModelApiResponse uploadFileWithRequiredFile(Long petId, File requiredFile, String additionalMetadata) throws ApiException {
-        ApiResponse<ModelApiResponse> localVarResp = uploadFileWithRequiredFileWithHttpInfo(petId, requiredFile, additionalMetadata);
-        return localVarResp.getData();
+    public com.amazonaws.Response uploadFileWithRequiredFile(Long petId, File requiredFile, String additionalMetadata) throws ApiException {
+        com.amazonaws.Response localVarResp = uploadFileWithRequiredFileWithHttpInfo(petId, requiredFile, additionalMetadata);
+        return localVarResp;
     }
 
     /**
@@ -913,7 +894,7 @@ public class PetApi {
      * @param petId ID of pet to update (required)
      * @param requiredFile file to upload (required)
      * @param additionalMetadata Additional data to pass to server (optional)
-     * @return ApiResponse&lt;ModelApiResponse&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -921,10 +902,9 @@ public class PetApi {
         <tr><td> 200 </td><td> successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ModelApiResponse> uploadFileWithRequiredFileWithHttpInfo(Long petId, File requiredFile, String additionalMetadata) throws ApiException {
-        com.amazonaws.Response localVarCall = uploadFileWithRequiredFileValidateBeforeCall(petId, requiredFile, additionalMetadata, null);
-        Type localVarReturnType = new TypeToken<ModelApiResponse>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    public com.amazonaws.Response uploadFileWithRequiredFileWithHttpInfo(Long petId, File requiredFile, String additionalMetadata) throws ApiException {
+        com.amazonaws.Response localVarCall = uploadFileWithRequiredFileValidateBeforeCall();
+        return localVarCall;
     }
 
 }

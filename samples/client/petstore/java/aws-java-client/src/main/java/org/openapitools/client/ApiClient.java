@@ -24,23 +24,30 @@ import java.lang.reflect.Type;
 import java.net.URI;
 import java.net.URLEncoder;
 
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.concurrent.TimeUnit;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Scanner;
 
-import org.openapitools.client.auth.Authentication;
-import org.openapitools.client.auth.ApiKeyAuth;
+import com.amazonaws.AmazonClientException;
+import com.amazonaws.ClientConfiguration;
+import com.amazonaws.DefaultRequest;
+import com.amazonaws.Request;
+import com.amazonaws.Response;
+import com.amazonaws.SdkBaseException;
+import com.amazonaws.auth.AWS4Signer;
+import com.amazonaws.auth.AWSCredentialsProviderChain;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
+import com.amazonaws.http.AmazonHttpClient;
+import com.amazonaws.http.ExecutionContext;
+import com.amazonaws.http.HttpMethodName;
+import com.amazonaws.http.HttpResponse;
+import com.amazonaws.http.HttpResponseHandler;
 
-import com.amazonaws.*;
-import com.amazonaws.http.*;
-import com.amazonaws.auth.*;
-
-import org.openapitools.client.auth.Authentication;
-import org.openapitools.client.auth.HttpBasicAuth;
-import org.openapitools.client.auth.HttpBearerAuth;
-import org.openapitools.client.auth.ApiKeyAuth;
 import org.openapitools.client.auth.OAuth;
 import org.openapitools.client.auth.RetryingOAuth;
 import org.openapitools.client.auth.OAuthFlow;
@@ -51,7 +58,6 @@ public class ApiClient {
     private boolean debugging = false;
     private Map<String, String> defaultHeaderMap = new HashMap<String, String>();
 
-    private Map<String, Authentication> authentications;
     private boolean verifyingSsl;
 
     private AmazonHttpClient httpClient;
@@ -70,14 +76,6 @@ public class ApiClient {
      */
     public ApiClient() {
         init();
-
-        // Setup authentications (key: authentication name, value: authentication).
-        authentications.put("api_key", new ApiKeyAuth("header", "api_key"));
-        authentications.put("api_key_query", new ApiKeyAuth("query", "api_key_query"));
-        authentications.put("http_basic_test", new HttpBasicAuth());
-        authentications.put("petstore_auth", new OAuth());
-        // Prevent the authentications from being modified.
-        authentications = Collections.unmodifiableMap(authentications);
     }
 
     /*
@@ -85,16 +83,6 @@ public class ApiClient {
      */
     public ApiClient(AmazonHttpClient client) {
         init();
-
-        httpClient = client;
-
-        // Setup authentications (key: authentication name, value: authentication).
-        authentications.put("api_key", new ApiKeyAuth("header", "api_key"));
-        authentications.put("api_key_query", new ApiKeyAuth("query", "api_key_query"));
-        authentications.put("http_basic_test", new HttpBasicAuth());
-        authentications.put("petstore_auth", new OAuth());
-        // Prevent the authentications from being modified.
-        authentications = Collections.unmodifiableMap(authentications);
     }
 
     private void init() {
@@ -104,8 +92,6 @@ public class ApiClient {
 
         // Set default User-Agent.
         setUserAgent("OpenAPI-Generator/1.0.0/java");
-
-        authentications = new HashMap<String, Authentication>();
 
         setSigningParams();
     }
@@ -122,8 +108,8 @@ public class ApiClient {
                                                    credProvider.getCredentials().getAWSSecretKey());
 
         this.region = "";
-        this.service = "";
-        this.method = "";
+        this.service = "execute-api";
+        this.method = "GET";
         this.path = "";
         this.queryParams = null;
         this.collectionQueryParams = null;
@@ -183,21 +169,6 @@ public class ApiClient {
         this.json = json;
         return this;
     }
-
-    /**
-     * Get authentications (key: authentication name, value: authentication).
-     *
-     * @return Map of authentication objects
-     */
-    public Map<String, Authentication> getAuthentications() { return authentications; }
-
-    /**
-     * Get authentication for the given name.
-     *
-     * @param authName The authentication name
-     * @return The authentication, null if not found
-     */
-    public Authentication getAuthentication(String authName) { return authentications.get(authName); }
 
     /**
      * Set the User-Agent header's value (by adding to the default header map).
@@ -369,35 +340,6 @@ public class ApiClient {
                 response.getHttpResponse().getHeaders(),
                 respBody);
         }
-    }
-
-    /**
-    * {@link #execute(com.amazonaws.Response, Type)}
-    *
-    * @param <T> Type
-    * @param response An instance of the Call object
-    * @return ApiResponse&lt;T&gt;
-    * @throws ApiException If fail to execute the call
-    */
-    public <T> ApiResponse<T> execute(com.amazonaws.Response response) throws ApiException {
-        return execute(response, null);
-    }
-
-    /**
-    * Execute HTTP call and deserialize the HTTP response body into the given return type.
-    *
-    * @param returnType The return type used to deserialize HTTP response body
-    * @param <T> The return type corresponding to (same with) returnType
-    * @param toRespond Call
-    * @return ApiResponse object containing response status, headers and
-    *   data, which is a Java object deserialized from response body and would be null
-    *   when returnType is null.
-    * @throws ApiException If fail to execute the call
-    */
-    public <T> ApiResponse<T> execute(com.amazonaws.Response toRespond, Type returnType) throws ApiException {
-        Response response = buildCall(this.path, this.method, this.queryParams, this.collectionQueryParams);
-        T data = handleResponse(response, returnType);
-        return new ApiResponse<T>(response.getHttpResponse().getStatusCode(), response.getHttpResponse().getHeaders(), data);
     }
 
     /**
@@ -591,7 +533,7 @@ public class ApiClient {
         if (this.region != "") {
             signer.setRegionName(this.region);
         }
-        signer.setServiceName(apiRequest.getServiceName());
+        signer.setServiceName(this.service);
         signer.sign(apiRequest, this.credentials);
         return apiRequest;
     }

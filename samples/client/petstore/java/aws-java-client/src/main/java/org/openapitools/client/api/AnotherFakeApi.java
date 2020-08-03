@@ -13,18 +13,12 @@
 
 package org.openapitools.client.api;
 
-import org.openapitools.client.ApiCallback;
 import org.openapitools.client.ApiClient;
 import org.openapitools.client.ApiException;
-import org.openapitools.client.ApiResponse;
 import org.openapitools.client.Configuration;
 import org.openapitools.client.Pair;
-import org.openapitools.client.model.Response;
 
 
-import com.google.gson.reflect.TypeToken;
-
-import java.io.IOException;
 
 
 import org.openapitools.client.model.Client;
@@ -79,8 +73,7 @@ public class AnotherFakeApi {
     /**
      * Build call for call123testSpecialTags
      * @param body client model (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -88,7 +81,7 @@ public class AnotherFakeApi {
         <tr><td> 200 </td><td> successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response call123testSpecialTagsCall(Client body, final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response call123testSpecialTagsCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/another-fake/dummy";
         localVarApiClient.setPath(localVarPath);
@@ -116,7 +109,7 @@ public class AnotherFakeApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response call123testSpecialTagsValidateBeforeCall(Client body, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response call123testSpecialTagsValidateBeforeCall() throws ApiException {
         
         // verify the required parameter 'body' is set
         if (body == null) {
@@ -124,7 +117,7 @@ public class AnotherFakeApi {
         }
         
 
-        com.amazonaws.Response localVarCall = call123testSpecialTagsCall(body, _callback);
+        com.amazonaws.Response localVarCall = call123testSpecialTagsCall();
         return localVarCall;
 
     }
@@ -133,7 +126,7 @@ public class AnotherFakeApi {
      * To test special tags
      * To test special tags and operation ID starting with number
      * @param body client model (required)
-     * @return Client
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -141,16 +134,16 @@ public class AnotherFakeApi {
         <tr><td> 200 </td><td> successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public Client call123testSpecialTags(Client body) throws ApiException {
-        ApiResponse<Client> localVarResp = call123testSpecialTagsWithHttpInfo(body);
-        return localVarResp.getData();
+    public com.amazonaws.Response call123testSpecialTags(Client body) throws ApiException {
+        com.amazonaws.Response localVarResp = call123testSpecialTagsWithHttpInfo(body);
+        return localVarResp;
     }
 
     /**
      * To test special tags
      * To test special tags and operation ID starting with number
      * @param body client model (required)
-     * @return ApiResponse&lt;Client&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -158,10 +151,9 @@ public class AnotherFakeApi {
         <tr><td> 200 </td><td> successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Client> call123testSpecialTagsWithHttpInfo(Client body) throws ApiException {
-        com.amazonaws.Response localVarCall = call123testSpecialTagsValidateBeforeCall(body, null);
-        Type localVarReturnType = new TypeToken<Client>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    public com.amazonaws.Response call123testSpecialTagsWithHttpInfo(Client body) throws ApiException {
+        com.amazonaws.Response localVarCall = call123testSpecialTagsValidateBeforeCall();
+        return localVarCall;
     }
 
 }

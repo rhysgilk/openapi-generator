@@ -227,11 +227,6 @@
             <version>${okhttp-version}</version>
         </dependency>
         <dependency>
-            <groupId>com.squareup.okhttp3</groupId>
-            <artifactId>logging-interceptor</artifactId>
-            <version>${okhttp-version}</version>
-        </dependency>
-        <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>${gson-version}</version>
@@ -255,6 +250,11 @@
             <groupId>org.threeten</groupId>
             <artifactId>threetenbp</artifactId>
             <version>${threetenbp-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-core</artifactId>
+            <version>1.11.710</version>
         </dependency>
         <dependency>
             <groupId>javax.annotation</groupId>

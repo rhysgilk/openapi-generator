@@ -13,18 +13,12 @@
 
 package org.openapitools.client.api;
 
-import org.openapitools.client.ApiCallback;
 import org.openapitools.client.ApiClient;
 import org.openapitools.client.ApiException;
-import org.openapitools.client.ApiResponse;
 import org.openapitools.client.Configuration;
 import org.openapitools.client.Pair;
-import org.openapitools.client.model.Response;
 
 
-import com.google.gson.reflect.TypeToken;
-
-import java.io.IOException;
 
 
 import org.openapitools.client.model.User;
@@ -79,8 +73,7 @@ public class UserApi {
     /**
      * Build call for createUser
      * @param body Created user object (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -88,7 +81,7 @@ public class UserApi {
         <tr><td> 0 </td><td> successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response createUserCall(User body, final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response createUserCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/user";
         localVarApiClient.setPath(localVarPath);
@@ -116,7 +109,7 @@ public class UserApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response createUserValidateBeforeCall(User body, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response createUserValidateBeforeCall() throws ApiException {
         
         // verify the required parameter 'body' is set
         if (body == null) {
@@ -124,7 +117,7 @@ public class UserApi {
         }
         
 
-        com.amazonaws.Response localVarCall = createUserCall(body, _callback);
+        com.amazonaws.Response localVarCall = createUserCall();
         return localVarCall;
 
     }
@@ -148,7 +141,7 @@ public class UserApi {
      * Create user
      * This can only be done by the logged in user.
      * @param body Created user object (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -156,16 +149,15 @@ public class UserApi {
         <tr><td> 0 </td><td> successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> createUserWithHttpInfo(User body) throws ApiException {
-        com.amazonaws.Response localVarCall = createUserValidateBeforeCall(body, null);
-        return localVarApiClient.execute(localVarCall);
+    public com.amazonaws.Response createUserWithHttpInfo(User body) throws ApiException {
+        com.amazonaws.Response localVarCall = createUserValidateBeforeCall();
+        return localVarCall;
     }
 
     /**
      * Build call for createUsersWithArrayInput
      * @param body List of user object (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -173,7 +165,7 @@ public class UserApi {
         <tr><td> 0 </td><td> successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response createUsersWithArrayInputCall(List<User> body, final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response createUsersWithArrayInputCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/user/createWithArray";
         localVarApiClient.setPath(localVarPath);
@@ -201,7 +193,7 @@ public class UserApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response createUsersWithArrayInputValidateBeforeCall(List<User> body, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response createUsersWithArrayInputValidateBeforeCall() throws ApiException {
         
         // verify the required parameter 'body' is set
         if (body == null) {
@@ -209,7 +201,7 @@ public class UserApi {
         }
         
 
-        com.amazonaws.Response localVarCall = createUsersWithArrayInputCall(body, _callback);
+        com.amazonaws.Response localVarCall = createUsersWithArrayInputCall();
         return localVarCall;
 
     }
@@ -233,7 +225,7 @@ public class UserApi {
      * Creates list of users with given input array
      * 
      * @param body List of user object (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -241,16 +233,15 @@ public class UserApi {
         <tr><td> 0 </td><td> successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> createUsersWithArrayInputWithHttpInfo(List<User> body) throws ApiException {
-        com.amazonaws.Response localVarCall = createUsersWithArrayInputValidateBeforeCall(body, null);
-        return localVarApiClient.execute(localVarCall);
+    public com.amazonaws.Response createUsersWithArrayInputWithHttpInfo(List<User> body) throws ApiException {
+        com.amazonaws.Response localVarCall = createUsersWithArrayInputValidateBeforeCall();
+        return localVarCall;
     }
 
     /**
      * Build call for createUsersWithListInput
      * @param body List of user object (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -258,7 +249,7 @@ public class UserApi {
         <tr><td> 0 </td><td> successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response createUsersWithListInputCall(List<User> body, final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response createUsersWithListInputCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/user/createWithList";
         localVarApiClient.setPath(localVarPath);
@@ -286,7 +277,7 @@ public class UserApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response createUsersWithListInputValidateBeforeCall(List<User> body, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response createUsersWithListInputValidateBeforeCall() throws ApiException {
         
         // verify the required parameter 'body' is set
         if (body == null) {
@@ -294,7 +285,7 @@ public class UserApi {
         }
         
 
-        com.amazonaws.Response localVarCall = createUsersWithListInputCall(body, _callback);
+        com.amazonaws.Response localVarCall = createUsersWithListInputCall();
         return localVarCall;
 
     }
@@ -318,7 +309,7 @@ public class UserApi {
      * Creates list of users with given input array
      * 
      * @param body List of user object (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -326,16 +317,15 @@ public class UserApi {
         <tr><td> 0 </td><td> successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> createUsersWithListInputWithHttpInfo(List<User> body) throws ApiException {
-        com.amazonaws.Response localVarCall = createUsersWithListInputValidateBeforeCall(body, null);
-        return localVarApiClient.execute(localVarCall);
+    public com.amazonaws.Response createUsersWithListInputWithHttpInfo(List<User> body) throws ApiException {
+        com.amazonaws.Response localVarCall = createUsersWithListInputValidateBeforeCall();
+        return localVarCall;
     }
 
     /**
      * Build call for deleteUser
      * @param username The name that needs to be deleted (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -344,7 +334,7 @@ public class UserApi {
         <tr><td> 404 </td><td> User not found </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response deleteUserCall(String username, final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response deleteUserCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/user/{username}"
             .replaceAll("\\{" + "username" + "\\}", localVarApiClient.escapeString(username.toString()));
@@ -373,7 +363,7 @@ public class UserApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response deleteUserValidateBeforeCall(String username, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response deleteUserValidateBeforeCall() throws ApiException {
         
         // verify the required parameter 'username' is set
         if (username == null) {
@@ -381,7 +371,7 @@ public class UserApi {
         }
         
 
-        com.amazonaws.Response localVarCall = deleteUserCall(username, _callback);
+        com.amazonaws.Response localVarCall = deleteUserCall();
         return localVarCall;
 
     }
@@ -406,7 +396,7 @@ public class UserApi {
      * Delete user
      * This can only be done by the logged in user.
      * @param username The name that needs to be deleted (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -415,16 +405,15 @@ public class UserApi {
         <tr><td> 404 </td><td> User not found </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> deleteUserWithHttpInfo(String username) throws ApiException {
-        com.amazonaws.Response localVarCall = deleteUserValidateBeforeCall(username, null);
-        return localVarApiClient.execute(localVarCall);
+    public com.amazonaws.Response deleteUserWithHttpInfo(String username) throws ApiException {
+        com.amazonaws.Response localVarCall = deleteUserValidateBeforeCall();
+        return localVarCall;
     }
 
     /**
      * Build call for getUserByName
      * @param username The name that needs to be fetched. Use user1 for testing. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -434,7 +423,7 @@ public class UserApi {
         <tr><td> 404 </td><td> User not found </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response getUserByNameCall(String username, final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response getUserByNameCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/user/{username}"
             .replaceAll("\\{" + "username" + "\\}", localVarApiClient.escapeString(username.toString()));
@@ -463,7 +452,7 @@ public class UserApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response getUserByNameValidateBeforeCall(String username, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response getUserByNameValidateBeforeCall() throws ApiException {
         
         // verify the required parameter 'username' is set
         if (username == null) {
@@ -471,7 +460,7 @@ public class UserApi {
         }
         
 
-        com.amazonaws.Response localVarCall = getUserByNameCall(username, _callback);
+        com.amazonaws.Response localVarCall = getUserByNameCall();
         return localVarCall;
 
     }
@@ -480,7 +469,7 @@ public class UserApi {
      * Get user by user name
      * 
      * @param username The name that needs to be fetched. Use user1 for testing. (required)
-     * @return User
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -490,16 +479,16 @@ public class UserApi {
         <tr><td> 404 </td><td> User not found </td><td>  -  </td></tr>
      </table>
      */
-    public User getUserByName(String username) throws ApiException {
-        ApiResponse<User> localVarResp = getUserByNameWithHttpInfo(username);
-        return localVarResp.getData();
+    public com.amazonaws.Response getUserByName(String username) throws ApiException {
+        com.amazonaws.Response localVarResp = getUserByNameWithHttpInfo(username);
+        return localVarResp;
     }
 
     /**
      * Get user by user name
      * 
      * @param username The name that needs to be fetched. Use user1 for testing. (required)
-     * @return ApiResponse&lt;User&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -509,18 +498,16 @@ public class UserApi {
         <tr><td> 404 </td><td> User not found </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<User> getUserByNameWithHttpInfo(String username) throws ApiException {
-        com.amazonaws.Response localVarCall = getUserByNameValidateBeforeCall(username, null);
-        Type localVarReturnType = new TypeToken<User>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    public com.amazonaws.Response getUserByNameWithHttpInfo(String username) throws ApiException {
+        com.amazonaws.Response localVarCall = getUserByNameValidateBeforeCall();
+        return localVarCall;
     }
 
     /**
      * Build call for loginUser
      * @param username The user name for login (required)
      * @param password The password for login in clear text (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -529,7 +516,7 @@ public class UserApi {
         <tr><td> 400 </td><td> Invalid username/password supplied </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response loginUserCall(String username, String password, final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response loginUserCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/user/login";
         localVarApiClient.setPath(localVarPath);
@@ -557,7 +544,7 @@ public class UserApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response loginUserValidateBeforeCall(String username, String password, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response loginUserValidateBeforeCall() throws ApiException {
         
         // verify the required parameter 'username' is set
         if (username == null) {
@@ -570,7 +557,7 @@ public class UserApi {
         }
         
 
-        com.amazonaws.Response localVarCall = loginUserCall(username, password, _callback);
+        com.amazonaws.Response localVarCall = loginUserCall();
         return localVarCall;
 
     }
@@ -580,7 +567,7 @@ public class UserApi {
      * 
      * @param username The user name for login (required)
      * @param password The password for login in clear text (required)
-     * @return String
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -589,9 +576,9 @@ public class UserApi {
         <tr><td> 400 </td><td> Invalid username/password supplied </td><td>  -  </td></tr>
      </table>
      */
-    public String loginUser(String username, String password) throws ApiException {
-        ApiResponse<String> localVarResp = loginUserWithHttpInfo(username, password);
-        return localVarResp.getData();
+    public com.amazonaws.Response loginUser(String username, String password) throws ApiException {
+        com.amazonaws.Response localVarResp = loginUserWithHttpInfo(username, password);
+        return localVarResp;
     }
 
     /**
@@ -599,7 +586,7 @@ public class UserApi {
      * 
      * @param username The user name for login (required)
      * @param password The password for login in clear text (required)
-     * @return ApiResponse&lt;String&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -608,16 +595,14 @@ public class UserApi {
         <tr><td> 400 </td><td> Invalid username/password supplied </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<String> loginUserWithHttpInfo(String username, String password) throws ApiException {
-        com.amazonaws.Response localVarCall = loginUserValidateBeforeCall(username, password, null);
-        Type localVarReturnType = new TypeToken<String>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    public com.amazonaws.Response loginUserWithHttpInfo(String username, String password) throws ApiException {
+        com.amazonaws.Response localVarCall = loginUserValidateBeforeCall();
+        return localVarCall;
     }
 
     /**
      * Build call for logoutUser
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -625,7 +610,7 @@ public class UserApi {
         <tr><td> 0 </td><td> successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response logoutUserCall(final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response logoutUserCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/user/logout";
         localVarApiClient.setPath(localVarPath);
@@ -653,10 +638,10 @@ public class UserApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response logoutUserValidateBeforeCall(final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response logoutUserValidateBeforeCall() throws ApiException {
         
 
-        com.amazonaws.Response localVarCall = logoutUserCall(_callback);
+        com.amazonaws.Response localVarCall = logoutUserCall();
         return localVarCall;
 
     }
@@ -678,7 +663,7 @@ public class UserApi {
     /**
      * Logs out current logged in user session
      * 
-     * @return ApiResponse&lt;Void&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -686,17 +671,16 @@ public class UserApi {
         <tr><td> 0 </td><td> successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> logoutUserWithHttpInfo() throws ApiException {
-        com.amazonaws.Response localVarCall = logoutUserValidateBeforeCall(null);
-        return localVarApiClient.execute(localVarCall);
+    public com.amazonaws.Response logoutUserWithHttpInfo() throws ApiException {
+        com.amazonaws.Response localVarCall = logoutUserValidateBeforeCall();
+        return localVarCall;
     }
 
     /**
      * Build call for updateUser
      * @param username name that need to be deleted (required)
      * @param body Updated user object (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -705,7 +689,7 @@ public class UserApi {
         <tr><td> 404 </td><td> User not found </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response updateUserCall(String username, User body, final ApiCallback _callback) throws ApiException {
+    public com.amazonaws.Response updateUserCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/user/{username}"
             .replaceAll("\\{" + "username" + "\\}", localVarApiClient.escapeString(username.toString()));
@@ -734,7 +718,7 @@ public class UserApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response updateUserValidateBeforeCall(String username, User body, final ApiCallback _callback) throws ApiException {
+    private com.amazonaws.Response updateUserValidateBeforeCall() throws ApiException {
         
         // verify the required parameter 'username' is set
         if (username == null) {
@@ -747,7 +731,7 @@ public class UserApi {
         }
         
 
-        com.amazonaws.Response localVarCall = updateUserCall(username, body, _callback);
+        com.amazonaws.Response localVarCall = updateUserCall();
         return localVarCall;
 
     }
@@ -774,7 +758,7 @@ public class UserApi {
      * This can only be done by the logged in user.
      * @param username name that need to be deleted (required)
      * @param body Updated user object (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return com.amazonaws.Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -783,9 +767,9 @@ public class UserApi {
         <tr><td> 404 </td><td> User not found </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> updateUserWithHttpInfo(String username, User body) throws ApiException {
-        com.amazonaws.Response localVarCall = updateUserValidateBeforeCall(username, body, null);
-        return localVarApiClient.execute(localVarCall);
+    public com.amazonaws.Response updateUserWithHttpInfo(String username, User body) throws ApiException {
+        com.amazonaws.Response localVarCall = updateUserValidateBeforeCall();
+        return localVarCall;
     }
 
 }

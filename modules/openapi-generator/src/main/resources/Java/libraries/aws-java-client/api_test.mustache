@@ -9,10 +9,6 @@ import org.junit.Test;
 import org.junit.Ignore;
 
 {{^fullJavaUtil}}
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 {{/fullJavaUtil}}
 
 /**
@@ -34,13 +30,8 @@ public class {{classname}}Test {
      */
     @Test
     public void {{operationId}}Test() throws ApiException {
-        {{#allParams}}
-        {{{dataType}}} {{paramName}} = null;
-        {{/allParams}}
-        {{#returnType}}{{{returnType}}} response = {{/returnType}}api.{{operationId}}{{^vendorExtensions.x-group-parameters}}({{#allParams}}{{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}});{{/vendorExtensions.x-group-parameters}}{{#vendorExtensions.x-group-parameters}}({{#requiredParams}}{{paramName}}{{#hasMore}}, {{/hasMore}}{{/requiredParams}}){{#optionalParams}}
-                .{{paramName}}({{paramName}}){{/optionalParams}}
-                .execute();{{/vendorExtensions.x-group-parameters}}
-
+        {{#returnType}}com.amazonaws.Response response = {{/returnType}}api.{{operationId}}({{#allParams}}{{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}});
+        System.out.println(response.getAwsResponse());
         // TODO: test validations
     }
     {{/operation}}{{/operations}}
