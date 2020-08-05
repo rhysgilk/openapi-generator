@@ -209,6 +209,11 @@ public class PythonClientCodegen extends DefaultCodegen implements CodegenConfig
             excludeTests = Boolean.valueOf(additionalProperties.get(CodegenConstants.EXCLUDE_TESTS).toString());
         }
 
+        if (additionalProperties.containsKey(CodegenConstants.DETECT_AMZN_APIGATEWAY_EXTENSIONS)) {
+            Boolean detectAmznApiGatewayExtensions = Boolean.valueOf(additionalProperties.get(CodegenConstants.DETECT_AMZN_APIGATEWAY_EXTENSIONS).toString());
+            additionalProperties.put(CodegenConstants.DETECT_AMZN_APIGATEWAY_EXTENSIONS, detectAmznApiGatewayExtensions);
+        }
+
         if (additionalProperties.containsKey(CodegenConstants.PACKAGE_NAME)) {
             setPackageName((String) additionalProperties.get(CodegenConstants.PACKAGE_NAME));
         }
