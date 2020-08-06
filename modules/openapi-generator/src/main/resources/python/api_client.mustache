@@ -11,6 +11,9 @@ from multiprocessing.pool import ThreadPool
 import os
 import re
 import tempfile
+{{#detectAmznApiGatewayExtensions}}
+from requests_sigv4 import Sigv4Request
+{{/detectAmznApiGatewayExtensions}}
 
 # python 2 and python 3 compatibility library
 import six
@@ -393,7 +396,7 @@ class ApiClient(object):
             then the method will return the response directly.
         """
         if not async_req:
-            return self.__call_api(resource_path, method,
+            return self.__call_api{{#detectAmznApiGatewayExtensions}}_signed{{/detectAmznApiGatewayExtensions}}(resource_path, method,
                                    path_params, query_params, header_params,
                                    body, post_params, files,
                                    response_type, auth_settings,
@@ -401,7 +404,7 @@ class ApiClient(object):
                                    _preload_content, _request_timeout, _host,
                                    _request_auth)
 
-        return self.pool.apply_async(self.__call_api, (resource_path,
+        return self.pool.apply_async(self.__call_api{{#detectAmznApiGatewayExtensions}}_signed{{/detectAmznApiGatewayExtensions}}, (resource_path,
                                                        method, path_params,
                                                        query_params,
                                                        header_params, body,
@@ -713,3 +716,85 @@ class ApiClient(object):
             if klass_name:
                 instance = self.__deserialize(data, klass_name)
         return instance
+
+    {{#detectAmznApiGatewayExtensions}}
+    {{#asyncio}}async {{/asyncio}}def __call_api_signed(
+            self, resource_path, method, path_params=None,
+            query_params=None, header_params=None, body=None, post_params=None,
+            files=None, response_type=None, auth_settings=None,
+            _return_http_data_only=None, collection_formats=None,
+            _preload_content=True, _request_timeout=None, _host=None,
+            _request_auth=None):
+
+        config = self.configuration
+
+        # header parameters
+        header_params = header_params or {}
+        header_params.update(self.default_headers)
+        if self.cookie:
+            header_params['Cookie'] = self.cookie
+        if header_params:
+            header_params = self.sanitize_for_serialization(header_params)
+            header_params = dict(self.parameters_to_tuples(header_params,
+                                                           collection_formats))
+
+        # path parameters
+        if path_params:
+            path_params = self.sanitize_for_serialization(path_params)
+            path_params = self.parameters_to_tuples(path_params,
+                                                    collection_formats)
+            for k, v in path_params:
+                # specified safe chars, encode everything
+                resource_path = resource_path.replace(
+                    '{%s}' % k,
+                    quote(str(v), safe=config.safe_chars_for_path_param)
+                )
+
+        # query parameters
+        if query_params:
+            query_params = self.sanitize_for_serialization(query_params)
+            query_params = self.parameters_to_tuples(query_params,
+                                                     collection_formats)
+
+        # post parameters
+        if post_params or files:
+            post_params = post_params if post_params else []
+            post_params = self.sanitize_for_serialization(post_params)
+            post_params = self.parameters_to_tuples(post_params,
+                                                    collection_formats)
+            post_params.extend(self.files_parameters(files))
+
+        # auth setting
+        self.update_params_for_auth(
+            header_params, query_params, auth_settings,
+            request_auth=_request_auth)
+
+        # body
+        if body:
+            body = self.sanitize_for_serialization(body)
+
+        # request url
+        if _host is None:
+            url = self.configuration.host + resource_path
+        else:
+            # use server/host defined in path or operation instead
+            url = _host + resource_path
+
+        try:
+            # perform request and return response
+            request = Sigv4Request()
+            response_data = request.request(
+                method=method, url=url,
+                headers=header_params, params=query_params)
+        except ApiException as e:
+            e.body = e.body.decode('utf-8') if six.PY3 else e.body
+            raise e
+
+        try:
+            data = json.loads(response_data.content)
+        except ValueError:
+            data = response_data.content
+
+        return data
+
+    {{/detectAmznApiGatewayExtensions}}

@@ -142,7 +142,8 @@ class {{classname}}(object):
                 '_return_http_data_only',
                 '_preload_content',
                 '_request_timeout',
-                '_request_auth'
+                '_request_auth'{{#detectAmznApiGatewayExtensions}},{{/detectAmznApiGatewayExtensions}}
+                {{#detectAmznApiGatewayExtensions}}'query_params'{{/detectAmznApiGatewayExtensions}}
             ]
         )
 

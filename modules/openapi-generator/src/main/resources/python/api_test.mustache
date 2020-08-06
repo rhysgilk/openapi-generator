@@ -28,6 +28,10 @@ class {{#operations}}Test{{classname}}(unittest.TestCase):
         {{{summary}}}  # noqa: E501
 {{/summary}}
         """
+{{#detectAmznApiGatewayExtensions}}
+        response = self.api.{{operationId}}()
+        print(response)
+{{/detectAmznApiGatewayExtensions}}
         pass
 
    {{/operation}}
