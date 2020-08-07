@@ -72,6 +72,9 @@ public class CodegenConstants {
     public static final String WITH_AWSV4_SIGNATURE_COMMENT = "withAWSV4Signature";
     public static final String WITH_AWSV4_SIGNATURE_COMMENT_DESC = "whether to include AWS v4 signature support";
 
+    public static final String DETECT_AMZN_APIGATEWAY_EXTENSIONS = "detectAmznApiGatewayExtensions";
+    public static final String DETECT_AMZN_APIGATEWAY_EXTENSIONS_DESC = "whether to include Api Gateway extensions, including AWSV4 support";
+
     public static final String IS_GO_SUBMODULE = "isGoSubmodule";
     public static final String IS_GO_SUBMODULE_DESC = "whether the generated Go module is a submodule";
 
