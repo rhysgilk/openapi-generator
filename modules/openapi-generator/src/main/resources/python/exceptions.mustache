@@ -106,6 +106,13 @@ class ApiException(OpenApiException):
             self.body = None
             self.headers = None
 
+{{#detectAmznApiGatewayExtensions}}
+        self.status = http_resp.status_code
+        self.reason = http_resp.reason
+        self.body = http_resp.text
+        self.headers = http_resp.headers
+{{/detectAmznApiGatewayExtensions}}
+
     def __str__(self):
         """Custom error messages for exception"""
         error_message = "({0})\n"\

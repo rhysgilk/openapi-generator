@@ -106,7 +106,6 @@ class DefaultApi(object):
                 '_preload_content',
                 '_request_timeout',
                 '_request_auth'
-                
             ]
         )
 

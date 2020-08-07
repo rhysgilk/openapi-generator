@@ -790,6 +790,9 @@ class ApiClient(object):
             e.body = e.body.decode('utf-8') if six.PY3 else e.body
             raise e
 
+        if not 200 <= response_data.status_code <= 299:
+            raise ApiException(http_resp=response_data)
+
         try:
             data = json.loads(response_data.content)
         except ValueError:
