@@ -137,6 +137,7 @@ class AnotherFakeApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
 
@@ -156,9 +157,9 @@ class AnotherFakeApi(object):
 
         return self.api_client.call_api(
             '/another-fake/dummy', 'PATCH',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,

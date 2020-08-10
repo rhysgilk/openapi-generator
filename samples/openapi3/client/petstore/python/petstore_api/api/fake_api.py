@@ -126,6 +126,7 @@ class FakeApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
 
@@ -139,9 +140,9 @@ class FakeApi(object):
 
         return self.api_client.call_api(
             '/fake/health', 'GET',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
@@ -267,6 +268,7 @@ class FakeApi(object):
         if 'header_1' in local_var_params:
             header_params['header_1'] = local_var_params['header_1']  # noqa: E501
 
+
         form_params = []
         local_var_files = {}
 
@@ -282,9 +284,9 @@ class FakeApi(object):
 
         return self.api_client.call_api(
             '/fake/http-signature-test', 'GET',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
@@ -394,6 +396,7 @@ class FakeApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
 
@@ -413,9 +416,9 @@ class FakeApi(object):
 
         return self.api_client.call_api(
             '/fake/outer/boolean', 'POST',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
@@ -525,6 +528,7 @@ class FakeApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
 
@@ -544,9 +548,9 @@ class FakeApi(object):
 
         return self.api_client.call_api(
             '/fake/outer/composite', 'POST',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
@@ -656,6 +660,7 @@ class FakeApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
 
@@ -675,9 +680,9 @@ class FakeApi(object):
 
         return self.api_client.call_api(
             '/fake/outer/number', 'POST',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
@@ -787,6 +792,7 @@ class FakeApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
 
@@ -806,9 +812,9 @@ class FakeApi(object):
 
         return self.api_client.call_api(
             '/fake/outer/string', 'POST',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
@@ -922,6 +928,7 @@ class FakeApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
 
@@ -937,9 +944,9 @@ class FakeApi(object):
 
         return self.api_client.call_api(
             '/fake/body-with-file-schema', 'PUT',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
@@ -1062,6 +1069,7 @@ class FakeApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
 
@@ -1077,9 +1085,9 @@ class FakeApi(object):
 
         return self.api_client.call_api(
             '/fake/body-with-query-params', 'PUT',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
@@ -1193,6 +1201,7 @@ class FakeApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
 
@@ -1212,9 +1221,9 @@ class FakeApi(object):
 
         return self.api_client.call_api(
             '/fake', 'PATCH',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
@@ -1433,6 +1442,7 @@ class FakeApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
         if 'integer' in local_var_params:
@@ -1474,9 +1484,9 @@ class FakeApi(object):
 
         return self.api_client.call_api(
             '/fake', 'POST',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
@@ -1635,6 +1645,7 @@ class FakeApi(object):
         if 'enum_header_string' in local_var_params:
             header_params['enum_header_string'] = local_var_params['enum_header_string']  # noqa: E501
 
+
         form_params = []
         local_var_files = {}
         if 'enum_form_string_array' in local_var_params:
@@ -1653,9 +1664,9 @@ class FakeApi(object):
 
         return self.api_client.call_api(
             '/fake', 'GET',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
@@ -1814,6 +1825,7 @@ class FakeApi(object):
         if 'boolean_group' in local_var_params:
             header_params['boolean_group'] = local_var_params['boolean_group']  # noqa: E501
 
+
         form_params = []
         local_var_files = {}
 
@@ -1823,9 +1835,9 @@ class FakeApi(object):
 
         return self.api_client.call_api(
             '/fake', 'DELETE',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
@@ -1937,6 +1949,7 @@ class FakeApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
 
@@ -1952,9 +1965,9 @@ class FakeApi(object):
 
         return self.api_client.call_api(
             '/fake/inline-additionalProperties', 'POST',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
@@ -2075,6 +2088,7 @@ class FakeApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
         if 'param' in local_var_params:
@@ -2092,9 +2106,9 @@ class FakeApi(object):
 
         return self.api_client.call_api(
             '/fake/jsonFormData', 'GET',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
@@ -2259,6 +2273,7 @@ class FakeApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
 
@@ -2268,9 +2283,9 @@ class FakeApi(object):
 
         return self.api_client.call_api(
             '/fake/test-query-paramters', 'PUT',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,

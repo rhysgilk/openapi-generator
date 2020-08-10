@@ -323,7 +323,7 @@ class ApiClient(object):
         else:
             return self.__deserialize_model(data, klass)
 
-    def call_api(self, resource_path, method,
+    def call_api(self, resource_path, method, 
                  path_params=None, query_params=None, header_params=None,
                  body=None, post_params=None, files=None,
                  response_type=None, auth_settings=None, async_req=None,
@@ -372,6 +372,7 @@ class ApiClient(object):
         """
         if not async_req:
             return self.__call_api(resource_path, method,
+                                  
                                    path_params, query_params, header_params,
                                    body, post_params, files,
                                    response_type, auth_settings,
@@ -380,8 +381,8 @@ class ApiClient(object):
                                    _request_auth)
 
         return self.pool.apply_async(self.__call_api, (resource_path,
-                                                       method, path_params,
-                                                       query_params,
+                                                       method,
+                                                       path_params, query_params,
                                                        header_params, body,
                                                        post_params, files,
                                                        response_type,

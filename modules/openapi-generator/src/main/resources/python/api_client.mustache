@@ -348,7 +348,8 @@ class ApiClient(object):
         else:
             return self.__deserialize_model(data, klass)
 
-    def call_api(self, resource_path, method,
+    def call_api(self, resource_path, method, {{#detectAmznApiGatewayExtensions}}
+                 region, access_key, secret_key,{{/detectAmznApiGatewayExtensions}}
                  path_params=None, query_params=None, header_params=None,
                  body=None, post_params=None, files=None,
                  response_type=None, auth_settings=None, async_req=None,
@@ -397,6 +398,7 @@ class ApiClient(object):
         """
         if not async_req:
             return self.__call_api{{#detectAmznApiGatewayExtensions}}_signed{{/detectAmznApiGatewayExtensions}}(resource_path, method,
+                                  {{#detectAmznApiGatewayExtensions}}region, access_key, secret_key,{{/detectAmznApiGatewayExtensions}}
                                    path_params, query_params, header_params,
                                    body, post_params, files,
                                    response_type, auth_settings,
@@ -405,8 +407,11 @@ class ApiClient(object):
                                    _request_auth)
 
         return self.pool.apply_async(self.__call_api{{#detectAmznApiGatewayExtensions}}_signed{{/detectAmznApiGatewayExtensions}}, (resource_path,
-                                                       method, path_params,
-                                                       query_params,
+                                                       method,
+                                                       {{#detectAmznApiGatewayExtensions}}
+                                                       region, access_key, secret_key,
+                                                       {{/detectAmznApiGatewayExtensions}}
+                                                       path_params, query_params,
                                                        header_params, body,
                                                        post_params, files,
                                                        response_type,
@@ -719,7 +724,7 @@ class ApiClient(object):
 
     {{#detectAmznApiGatewayExtensions}}
     {{#asyncio}}async {{/asyncio}}def __call_api_signed(
-            self, resource_path, method, path_params=None,
+            self, resource_path, method, region, access_key, secret_key, path_params=None,
             query_params=None, header_params=None, body=None, post_params=None,
             files=None, response_type=None, auth_settings=None,
             _return_http_data_only=None, collection_formats=None,
@@ -782,7 +787,7 @@ class ApiClient(object):
 
         try:
             # perform request and return response
-            request = Sigv4Request()
+            request = Sigv4Request(region=region, access_key=access_key, secret_key=secret_key)
             response_data = request.request(
                 method=method, url=url,
                 headers=header_params, params=query_params)
