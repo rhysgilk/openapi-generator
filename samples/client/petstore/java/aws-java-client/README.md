@@ -80,21 +80,30 @@ import org.openapitools.client.api.AnotherFakeApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://petstore.swagger.io:80/v2");
+    private final DefaultApi api = new DefaultApi();
+    com.amazonaws.Response response = api.call123testSpecialTags();
+    System.out.println(response.getAwsResponse());
+  }
+}
 
-    AnotherFakeApi apiInstance = new AnotherFakeApi(defaultClient);
-    Client body = new Client(); // Client | client model
-    try {
-      Client result = apiInstance.call123testSpecialTags(body);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling AnotherFakeApi#call123testSpecialTags");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
+```
+
+To provide parameters for signing and invoking the API manually, execute the following:
+
+```java
+
+// Import classes:
+import org.openapitools.client.ApiClient;
+import org.openapitools.client.ApiException;
+import org.openapitools.client.Configuration;
+import org.openapitools.client.models.*;
+import org.openapitools.client.api.AnotherFakeApi;
+
+public class Example {
+  public static void main(String[] args) {
+    private final DefaultApi api = new DefaultApi();
+    com.amazonaws.Response response = api.getApiClient().buildCallWithParams(/*Params Here*/);
+    System.out.println(response.getAwsResponse());
   }
 }
 

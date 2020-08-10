@@ -81,7 +81,7 @@ public class FakeClassnameTags123Api {
         <tr><td> 200 </td><td> successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response testClassnameCall() throws ApiException {
+    private com.amazonaws.Response testClassnameCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/fake_classname_test";
         localVarApiClient.setPath(localVarPath);
@@ -108,20 +108,6 @@ public class FakeClassnameTags123Api {
         return localVarApiClient.buildCall(localVarPath, "PATCH", this.query, this.collection);
     }
 
-    @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response testClassnameValidateBeforeCall() throws ApiException {
-        
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling testClassname(Async)");
-        }
-        
-
-        com.amazonaws.Response localVarCall = testClassnameCall();
-        return localVarCall;
-
-    }
-
     /**
      * To test class name in snake case
      * To test class name in snake case
@@ -135,25 +121,7 @@ public class FakeClassnameTags123Api {
      </table>
      */
     public com.amazonaws.Response testClassname(Client body) throws ApiException {
-        com.amazonaws.Response localVarResp = testClassnameWithHttpInfo(body);
-        return localVarResp;
-    }
-
-    /**
-     * To test class name in snake case
-     * To test class name in snake case
-     * @param body client model (required)
-     * @return com.amazonaws.Response
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> successful operation </td><td>  -  </td></tr>
-     </table>
-     */
-    public com.amazonaws.Response testClassnameWithHttpInfo(Client body) throws ApiException {
-        com.amazonaws.Response localVarCall = testClassnameValidateBeforeCall();
-        return localVarCall;
+        return testClassnameCall();
     }
 
 }

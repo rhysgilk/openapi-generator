@@ -99,7 +99,7 @@ public class ApiClient {
     /**
     * Sets up credentials and sets default values for signing
     *
-    * @return Base path
+    *
     */
     private void setSigningParams() {
         // Read default credentials
@@ -116,11 +116,22 @@ public class ApiClient {
     }
 
     /**
-     * Get base path
-     *
-     * @return Base path
-     */
-    public String getBasePath() { return basePath; }
+    * Set path
+    *
+    * @param path Path of the URL
+    */
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    /**
+    * Set method
+    *
+    * @param method Method for invoking
+    */
+    public void setMethod(String method) {
+        this.method = method;
+    }
 
     /**
      * Set base path
@@ -130,43 +141,6 @@ public class ApiClient {
      */
     public ApiClient setBasePath(String basePath) {
         this.basePath = basePath;
-        return this;
-    }
-
-    /**
-     * Get HTTP client
-     *
-     * @return An instance of AmazonHttpClient
-     */
-    public AmazonHttpClient getHttpClient() { return httpClient; }
-
-    /**
-     * Set HTTP client, which must never be null.
-     *
-     * @param newHttpClient An instance of AmazonHttpClient
-     * @return Api Client
-     * @throws NullPointerException when newHttpClient is null
-     */
-    public ApiClient setHttpClient(AmazonHttpClient newHttpClient) {
-        this.httpClient = Objects.requireNonNull(newHttpClient, "HttpClient must not be null!");
-        return this;
-    }
-
-    /**
-     * Get JSON
-     *
-     * @return JSON object
-     */
-    public JSON getJSON() { return json; }
-
-    /**
-     * Set JSON
-     *
-     * @param json JSON object
-     * @return Api client
-     */
-    public ApiClient setJSON(JSON json) {
-        this.json = json;
         return this;
     }
 
@@ -293,37 +267,36 @@ public class ApiClient {
     }
 
     /**
-     * Deserialize response body to Java object, according to the return type and
-     * the Content-Type response header.
-     *
-     * @param <T> Type
-     * @param response HTTP response
-     * @param returnType The type of the Java object
-     * @return The deserialized Java object
-     * @throws ApiException If fail to deserialize response body, i.e. cannot read response body
-     *   or the Content-Type of the response is not supported.
-     */
-    @SuppressWarnings("unchecked")
-    public <T> T deserialize(Response response, Type returnType) throws ApiException {
+    * Deserialize response body to Java object, according to the return type and
+    * the Content-Type response header.
+    *
+    * @param <T> Type
+    * @param response HTTP response
+    * @param returnType The type of the Java object
+    * @return The deserialized Java object
+    * @throws ApiException If fail to deserialize response body, i.e. cannot read response body
+    *   or the Content-Type of the response is not supported.
+    */
+    public <T> T deserialize(HttpResponse response, Type returnType) throws ApiException {
         if (response == null || returnType == null) {
             return null;
         }
 
         if ("byte[]".equals(returnType.toString())) {
             // Handle binary response (byte array).
-            return (T) response.getAwsResponse().toString();
+            return (T) response.getContent().toString();
         }
 
         String respBody;
-        if (response.getAwsResponse() != null)
-            respBody = response.getAwsResponse().toString();
+        if (response.getContent() != null)
+            respBody = response.getContent().toString();
         else
             respBody = null;
 
         if (respBody == null || "".equals(respBody)) {
             return null;
         }
-        String contentType = response.getHttpResponse().getHeaders().get("Content-Type");
+        String contentType = response.getHeaders().get("Content-Type");
         if (contentType == null) {
             // ensuring a default content type
             contentType = "application/json";
@@ -336,8 +309,8 @@ public class ApiClient {
         } else {
             throw new ApiException(
                 "Content type \"" + contentType + "\" is not supported for type: " + returnType,
-                response.getHttpResponse().getStatusCode(),
-                response.getHttpResponse().getHeaders(),
+                response.getStatusCode(),
+                response.getHeaders(),
                 respBody);
         }
     }
@@ -352,75 +325,29 @@ public class ApiClient {
     * @throws ApiException If the response has an unsuccessful status code or
     *                      fail to deserialize the response body
     */
-    public <T> T handleResponse(Response response, Type returnType) throws ApiException {
-        if (response.getHttpResponse().getStatusCode() >= 200 && response.getHttpResponse().getStatusCode() < 300) {
-            if (returnType == null || response.getHttpResponse().getStatusCode() == 204) {
+    public <T> T handleResponse(HttpResponse response, Type returnType) throws ApiException {
+        if (response.getStatusCode() >= 200 && response.getStatusCode() <= 299) {
+            if (returnType == null || response.getStatusCode() == 204) {
                 // returning null if the returnType is not defined,
                 // or the status code is 204 (No Content)
-                if (response.getHttpResponse().getContent() != null) {
+                if (response.getContent() != null) {
                     try {
-                        response.getHttpResponse().getContent().close();
+                        response.getContent().close();
                     } catch (Exception e) {
-                        throw new ApiException(response.getHttpResponse().getStatusText(), e, response.getHttpResponse().getStatusCode(), response.getHttpResponse().getHeaders());
-                    }
+                    throw new ApiException(response.getStatusText(), e, response.getStatusCode(), response.getHeaders());
                 }
-                return null;
+            }
+            return null;
             } else {
                 return deserialize(response, returnType);
             }
         } else {
             String respBody = null;
-            if (response.getAwsResponse() != null) {
-                respBody = response.getAwsResponse().toString();
+            if (response.getContent() != null) {
+                respBody = response.getContent().toString();
             }
-            throw new ApiException(response.getHttpResponse().getStatusText(), response.getHttpResponse().getStatusCode(), response.getHttpResponse().getHeaders(), respBody);
+            throw new ApiException(response.getStatusText(), response.getStatusCode(), response.getHeaders(), respBody);
         }
-    }
-
-    /**
-    * Set AWS Credentials for a signed call to API
-    *
-    * @param accessKey The accessKey for the signing process
-    * @param secretKey The secretKey for the signing process
-    */
-    public void setAWSCredentials(String accessKey, String secretKey) {
-        this.credentials = new BasicAWSCredentials(accessKey, secretKey);
-    }
-
-    /**
-    * Set region for a signed call to API
-    *
-    * @param region The region of the API being invoked
-    */
-    public void setAWSRegion(String region) {
-        this.region = region;
-    }
-
-    /**
-    * Set service for a signed call to API
-    *
-    * @param service The region of the API being invoked
-    */
-    public void setService(String service) {
-        this.service = service;
-    }
-
-    /**
-    * Set path for a signed call to API
-    *
-    * @param path The region of the API being invoked
-    */
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    /**
-    * Set method for a signed call to API
-    *
-    * @param method The region of the API being invoked
-    */
-    public void setMethod(String method) {
-        this.method = method;
     }
 
     /**
@@ -444,14 +371,38 @@ public class ApiClient {
     private class SimpleAwsErrorHandler implements HttpResponseHandler<SdkBaseException> {
         @Override
         public AmazonClientException handle(HttpResponse response) throws Exception {
+            try {
+                handleResponse(response, null);
+            } catch (Exception e){
+                throw new ApiException(response.getStatusText(), e, response.getStatusCode(), response.getHeaders());
+            }
             String toThrow = response.getStatusCode() + " " + response.getStatusText() + "\n" + response.getHeaders();
-            AmazonClientException e = new AmazonClientException(toThrow);
-            return e;
+            AmazonClientException er = new AmazonClientException(toThrow);
+            return er;
         }
         @Override
         public boolean needsConnectionLeftOpen() {
             return false;
         }
+    }
+
+    /**
+    * Build HTTP call with the given options.
+    *
+    * @param path The sub-path of the HTTP URL
+    * @param method The request method, one of "GET", "HEAD", "OPTIONS", "POST", "PUT", "PATCH" and "DELETE"
+    * @param queryParam The query parameters
+    * @param collectionQueryParams The collection query parameters
+    * @param accessKey The accessKey for the signing process
+    * @param secretKey The secretKey for the signing process
+    * @param region The region for the signing process
+    * @return The HTTP call
+    * @throws ApiException If fail to serialize the request body object
+    */
+    public Response buildCallWithParams(String path, String method, List<Pair> queryParam, List<Pair> collectionQueryParams,
+                                        String accessKey, String secretKey, String region) throws ApiException {
+        Request apiRequest = buildRequestWithParams(path, method, queryParam, collectionQueryParams, accessKey, secretKey, region);
+        return newCall(apiRequest);
     }
 
     /**
@@ -475,7 +426,7 @@ public class ApiClient {
     * @param apiRequest The request to the API
     * @return The Response from the API
     */
-    public Response newCall(Request apiRequest) {
+    private Response newCall(Request apiRequest) {
         Response response = new AmazonHttpClient(new ClientConfiguration())
             .requestExecutionBuilder()
             .executionContext(new ExecutionContext(true))
@@ -509,8 +460,34 @@ public class ApiClient {
     * @return The HTTP request
     * @throws ApiException If fail to serialize the request body object
     */
-    public Request buildRequest(String path, String method, List<Pair> queryParams, List<Pair> collectionQueryParams) throws ApiException {
+    private Request buildRequest(String path, String method, List<Pair> queryParams, List<Pair> collectionQueryParams) throws ApiException {
         final String url = buildUrl(path, queryParams, collectionQueryParams);
+
+        // Creating Request
+        Request apiRequest = new DefaultRequest<>("");
+        apiRequest.setHttpMethod(HttpMethodName.valueOf(method));
+
+        apiRequest.setEndpoint(URI.create(url));
+        apiRequest = signRequest(apiRequest);
+
+        return apiRequest;
+    }
+
+    /**
+    * Build an HTTP request with the given options.
+    *
+    * @param path The sub-path of the HTTP URL
+    * @param method The request method, one of "GET", "HEAD", "OPTIONS", "POST", "PUT", "PATCH" and "DELETE"
+    * @param queryParams The query parameters
+    * @param collectionQueryParams The collection query parameters
+    * @return The HTTP request
+    * @throws ApiException If fail to serialize the request body object
+    */
+    private Request buildRequestWithParams(String path, String method, List<Pair> queryParams, List<Pair> collectionQueryParams,
+                                           String accessKey, String secretKey, String region) throws ApiException {
+        final String url = buildUrl(path, queryParams, collectionQueryParams);
+        this.credentials = new BasicAWSCredentials(accessKey, secretKey);
+        this.region = region;
 
         // Creating Request
         Request apiRequest = new DefaultRequest<>("");
@@ -530,7 +507,7 @@ public class ApiClient {
     */
     private Request signRequest(Request apiRequest) {
         AWS4Signer signer = new AWS4Signer();
-        if (this.region != "") {
+        if (!("".equals(this.region))) {
             signer.setRegionName(this.region);
         }
         signer.setServiceName(this.service);
@@ -546,7 +523,7 @@ public class ApiClient {
      * @param collectionQueryParams The collection query parameters
      * @return The full URL
      */
-    public String buildUrl(String path, List<Pair> queryParams, List<Pair> collectionQueryParams) {
+    private String buildUrl(String path, List<Pair> queryParams, List<Pair> collectionQueryParams) {
         final StringBuilder url = new StringBuilder();
         url.append(basePath).append(path);
 

@@ -104,7 +104,7 @@ public class {{classname}} {
     {{#isDeprecated}}
     @Deprecated
     {{/isDeprecated}}
-    public{{/vendorExtensions.x-group-parameters}}{{#vendorExtensions.x-group-parameters}}private{{/vendorExtensions.x-group-parameters}} com.amazonaws.Response {{operationId}}Call() throws ApiException {
+    private{{/vendorExtensions.x-group-parameters}}{{#vendorExtensions.x-group-parameters}}private{{/vendorExtensions.x-group-parameters}} com.amazonaws.Response {{operationId}}Call() throws ApiException {
         // create path and map variables
         String localVarPath = "{{{path}}}"{{#pathParams}}
             .replaceAll("\\{" + "{{baseName}}" + "\\}", localVarApiClient.escapeString({{#collectionFormat}}localVarApiClient.collectionPathParameterToString("{{{collectionFormat}}}", {{{paramName}}}){{/collectionFormat}}{{^collectionFormat}}{{{paramName}}}.toString(){{/collectionFormat}})){{/pathParams}};
@@ -137,25 +137,6 @@ public class {{classname}} {
         return localVarApiClient.buildCall(localVarPath, "{{httpMethod}}", this.query, this.collection);
     }
 
-    {{#isDeprecated}}
-    @Deprecated
-    {{/isDeprecated}}
-    @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response {{operationId}}ValidateBeforeCall() throws ApiException {
-        {{^performBeanValidation}}
-        {{#allParams}}{{#required}}
-        // verify the required parameter '{{paramName}}' is set
-        if ({{paramName}} == null) {
-            throw new ApiException("Missing the required parameter '{{paramName}}' when calling {{operationId}}(Async)");
-        }
-        {{/required}}{{/allParams}}
-
-        com.amazonaws.Response localVarCall = {{operationId}}Call();
-        return localVarCall;
-
-        {{/performBeanValidation}}
-    }
-
     {{^vendorExtensions.x-group-parameters}}
     /**
      * {{summary}}
@@ -184,41 +165,9 @@ public class {{classname}} {
     @Deprecated
     {{/isDeprecated}}
     public {{#returnType}}com.amazonaws.Response {{/returnType}}{{^returnType}}void {{/returnType}}{{operationId}}({{#allParams}}{{{dataType}}} {{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}}) throws ApiException {
-        {{#returnType}}com.amazonaws.Response localVarResp = {{/returnType}}{{operationId}}WithHttpInfo({{#allParams}}{{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}});{{#returnType}}
-        return localVarResp;{{/returnType}}
+        return {{operationId}}Call();
     }
     {{/vendorExtensions.x-group-parameters}}
-
-    {{^vendorExtensions.x-group-parameters}}/**
-     * {{summary}}
-     * {{notes}}{{#allParams}}
-     * @param {{paramName}} {{description}}{{#required}} (required){{/required}}{{^required}} (optional{{^isContainer}}{{#defaultValue}}, default to {{.}}{{/defaultValue}}{{/isContainer}}){{/required}}{{/allParams}}
-     * @return com.amazonaws.Response
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     {{#responses.0}}
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        {{#responses}}
-        <tr><td> {{code}} </td><td> {{message}} </td><td> {{#headers}} * {{baseName}} - {{description}} <br> {{/headers}}{{^headers.0}} - {{/headers.0}} </td></tr>
-        {{/responses}}
-     </table>
-     {{/responses.0}}
-     {{#isDeprecated}}
-     * @deprecated
-     {{/isDeprecated}}
-        {{#externalDocs}}
-     * {{description}}
-     * @see <a href="{{url}}">{{summary}} Documentation</a>
-        {{/externalDocs}}
-     */
-    {{#isDeprecated}}
-    @Deprecated
-    {{/isDeprecated}}
-    public{{/vendorExtensions.x-group-parameters}}{{#vendorExtensions.x-group-parameters}}private{{/vendorExtensions.x-group-parameters}} com.amazonaws.Response {{operationId}}WithHttpInfo({{#allParams}}{{#useBeanValidation}}{{>beanValidationQueryParams}}{{/useBeanValidation}}{{{dataType}}} {{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}}) throws ApiException {
-        com.amazonaws.Response localVarCall = {{operationId}}ValidateBeforeCall();
-        return localVarCall;
-    }
 
     {{#vendorExtensions.x-group-parameters}}
 

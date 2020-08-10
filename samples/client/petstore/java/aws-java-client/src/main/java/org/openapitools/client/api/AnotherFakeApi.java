@@ -81,7 +81,7 @@ public class AnotherFakeApi {
         <tr><td> 200 </td><td> successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public com.amazonaws.Response call123testSpecialTagsCall() throws ApiException {
+    private com.amazonaws.Response call123testSpecialTagsCall() throws ApiException {
         // create path and map variables
         String localVarPath = "/another-fake/dummy";
         localVarApiClient.setPath(localVarPath);
@@ -108,20 +108,6 @@ public class AnotherFakeApi {
         return localVarApiClient.buildCall(localVarPath, "PATCH", this.query, this.collection);
     }
 
-    @SuppressWarnings("rawtypes")
-    private com.amazonaws.Response call123testSpecialTagsValidateBeforeCall() throws ApiException {
-        
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling call123testSpecialTags(Async)");
-        }
-        
-
-        com.amazonaws.Response localVarCall = call123testSpecialTagsCall();
-        return localVarCall;
-
-    }
-
     /**
      * To test special tags
      * To test special tags and operation ID starting with number
@@ -135,25 +121,7 @@ public class AnotherFakeApi {
      </table>
      */
     public com.amazonaws.Response call123testSpecialTags(Client body) throws ApiException {
-        com.amazonaws.Response localVarResp = call123testSpecialTagsWithHttpInfo(body);
-        return localVarResp;
-    }
-
-    /**
-     * To test special tags
-     * To test special tags and operation ID starting with number
-     * @param body client model (required)
-     * @return com.amazonaws.Response
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> successful operation </td><td>  -  </td></tr>
-     </table>
-     */
-    public com.amazonaws.Response call123testSpecialTagsWithHttpInfo(Client body) throws ApiException {
-        com.amazonaws.Response localVarCall = call123testSpecialTagsValidateBeforeCall();
-        return localVarCall;
+        return call123testSpecialTagsCall();
     }
 
 }
