@@ -114,7 +114,6 @@ class ApiException(OpenApiException):
             self.body = None
             self.headers = None
 
-
     def __str__(self):
         """Custom error messages for exception"""
         error_message = "({0})\n"\

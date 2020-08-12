@@ -119,9 +119,9 @@ class ApiClient(object):
         self.default_headers[header_name] = header_value
 
     async def __call_api(
-            self, resource_path, method, path_params=None,
-            query_params=None, header_params=None, body=None, post_params=None,
-            files=None, response_type=None, auth_settings=None,
+            self, resource_path, method, 
+            path_params=None, query_params=None, header_params=None, body=None,
+            post_params=None, files=None, response_type=None, auth_settings=None,
             _return_http_data_only=None, collection_formats=None,
             _preload_content=True, _request_timeout=None, _host=None,
             _request_auth=None):
@@ -179,6 +179,7 @@ class ApiClient(object):
         else:
             # use server/host defined in path or operation instead
             url = _host + resource_path
+
 
         try:
             # perform request and return response
@@ -691,4 +692,3 @@ class ApiClient(object):
             if klass_name:
                 instance = self.__deserialize(data, klass_name)
         return instance
-
