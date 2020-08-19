@@ -137,6 +137,7 @@ class FakeClassnameTags123Api(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
 
@@ -156,9 +157,9 @@ class FakeClassnameTags123Api(object):
 
         return self.api_client.call_api(
             '/fake_classname_test', 'PATCH',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,

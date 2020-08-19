@@ -126,6 +126,7 @@ class DefaultApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
 
@@ -139,9 +140,9 @@ class DefaultApi(object):
 
         return self.api_client.call_api(
             '/foo', 'GET',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,

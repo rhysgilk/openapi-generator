@@ -139,6 +139,7 @@ class StoreApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
 
@@ -148,9 +149,9 @@ class StoreApi(object):
 
         return self.api_client.call_api(
             '/store/order/{order_id}', 'DELETE',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
@@ -255,6 +256,7 @@ class StoreApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
 
@@ -268,9 +270,9 @@ class StoreApi(object):
 
         return self.api_client.call_api(
             '/store/inventory', 'GET',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
@@ -390,6 +392,7 @@ class StoreApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
 
@@ -403,9 +406,9 @@ class StoreApi(object):
 
         return self.api_client.call_api(
             '/store/order/{order_id}', 'GET',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
@@ -517,6 +520,7 @@ class StoreApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
 
@@ -536,9 +540,9 @@ class StoreApi(object):
 
         return self.api_client.call_api(
             '/store/order', 'POST',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,

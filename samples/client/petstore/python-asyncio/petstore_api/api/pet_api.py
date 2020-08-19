@@ -135,6 +135,7 @@ class PetApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
 
@@ -150,9 +151,9 @@ class PetApi(object):
 
         return self.api_client.call_api(
             '/pet', 'POST',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
@@ -273,6 +274,7 @@ class PetApi(object):
         if 'api_key' in local_var_params:
             header_params['api_key'] = local_var_params['api_key']  # noqa: E501
 
+
         form_params = []
         local_var_files = {}
 
@@ -282,9 +284,9 @@ class PetApi(object):
 
         return self.api_client.call_api(
             '/pet/{petId}', 'DELETE',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
@@ -401,6 +403,7 @@ class PetApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
 
@@ -414,9 +417,9 @@ class PetApi(object):
 
         return self.api_client.call_api(
             '/pet/findByStatus', 'GET',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
@@ -533,6 +536,7 @@ class PetApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
 
@@ -546,9 +550,9 @@ class PetApi(object):
 
         return self.api_client.call_api(
             '/pet/findByTags', 'GET',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
@@ -664,6 +668,7 @@ class PetApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
 
@@ -677,9 +682,9 @@ class PetApi(object):
 
         return self.api_client.call_api(
             '/pet/{petId}', 'GET',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
@@ -791,6 +796,7 @@ class PetApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
 
@@ -806,9 +812,9 @@ class PetApi(object):
 
         return self.api_client.call_api(
             '/pet', 'PUT',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
@@ -932,6 +938,7 @@ class PetApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
         if 'name' in local_var_params:
@@ -949,9 +956,9 @@ class PetApi(object):
 
         return self.api_client.call_api(
             '/pet/{petId}', 'POST',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
@@ -1075,6 +1082,7 @@ class PetApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
         if 'additional_metadata' in local_var_params:
@@ -1096,9 +1104,9 @@ class PetApi(object):
 
         return self.api_client.call_api(
             '/pet/{petId}/uploadImage', 'POST',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
@@ -1226,6 +1234,7 @@ class PetApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
         if 'additional_metadata' in local_var_params:
@@ -1247,9 +1256,9 @@ class PetApi(object):
 
         return self.api_client.call_api(
             '/fake/{petId}/uploadImageWithRequiredFile', 'POST',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,

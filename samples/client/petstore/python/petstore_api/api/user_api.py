@@ -137,6 +137,7 @@ class UserApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
 
@@ -148,9 +149,9 @@ class UserApi(object):
 
         return self.api_client.call_api(
             '/user', 'POST',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
@@ -262,6 +263,7 @@ class UserApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
 
@@ -273,9 +275,9 @@ class UserApi(object):
 
         return self.api_client.call_api(
             '/user/createWithArray', 'POST',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
@@ -387,6 +389,7 @@ class UserApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
 
@@ -398,9 +401,9 @@ class UserApi(object):
 
         return self.api_client.call_api(
             '/user/createWithList', 'POST',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
@@ -516,6 +519,7 @@ class UserApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
 
@@ -525,9 +529,9 @@ class UserApi(object):
 
         return self.api_client.call_api(
             '/user/{username}', 'DELETE',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
@@ -641,6 +645,7 @@ class UserApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
 
@@ -654,9 +659,9 @@ class UserApi(object):
 
         return self.api_client.call_api(
             '/user/{username}', 'GET',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
@@ -781,6 +786,7 @@ class UserApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
 
@@ -794,9 +800,9 @@ class UserApi(object):
 
         return self.api_client.call_api(
             '/user/login', 'GET',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
@@ -899,6 +905,7 @@ class UserApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
 
@@ -908,9 +915,9 @@ class UserApi(object):
 
         return self.api_client.call_api(
             '/user/logout', 'GET',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
@@ -1035,6 +1042,7 @@ class UserApi(object):
 
         header_params = {}
 
+
         form_params = []
         local_var_files = {}
 
@@ -1046,9 +1054,9 @@ class UserApi(object):
 
         return self.api_client.call_api(
             '/user/{username}', 'PUT',
-            path_params,
-            query_params,
-            header_params,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
