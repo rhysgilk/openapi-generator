@@ -28,6 +28,10 @@ export default class <&classname> {
     /**
      * Callback function to receive the result of the <&operationId> operation.
      * @callback module:<#invokerPackage><&invokerPackage>/</invokerPackage><#apiPackage><&apiPackage>/</apiPackage><&classname>~<&operationId>Callback
+     <#detectAmznApiGatewayExtensions>
+     * @param {String} accessKey for SigV4 signing process
+     * @param {String} secretKey for SigV4 signing process
+     </detectAmznApiGatewayExtensions>
      * @param {String} error Error message, if any.
      * @param <#vendorExtensions.x-jsdoc-type>{<&vendorExtensions.x-jsdoc-type>} data The data returned by the service call.</vendorExtensions.x-jsdoc-type><^vendorExtensions.x-jsdoc-type>data This operation does not return a value.</vendorExtensions.x-jsdoc-type>
      * @param {String} response The complete HTTP response.
@@ -43,7 +47,7 @@ export default class <&classname> {
      * data is of type: {@link <&vendorExtensions.x-jsdoc-type>}</returnType></usePromises><#usePromises>
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}<#returnType>, with an object containing data of type {@link <&vendorExtensions.x-jsdoc-type>} and HTTP response</returnType><^returnType>, with an object containing HTTP response</returnType></usePromises>
      */
-</emitJSDoc>    <operationId><#usePromises>WithHttpInfo</usePromises>(<vendorExtensions.x-codegen-arg-list>) {
+</emitJSDoc>    <operationId><#usePromises>WithHttpInfo</usePromises>(<vendorExtensions.x-codegen-arg-list><#detectAmznApiGatewayExtensions>, accessKey, secretKey</detectAmznApiGatewayExtensions>) {
       <#vendorExtensions.x-codegen-has-optional-params>
       opts = opts || {};
       </vendorExtensions.x-codegen-has-optional-params>
@@ -88,7 +92,8 @@ export default class <&classname> {
       return this.apiClient.callApi(
         '<&path>', '<httpMethod>',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, <#servers.0>basePath</servers.0><^servers.0>null</servers.0><^usePromises>, callback</usePromises>
+        authNames, contentTypes, accepts, returnType, <#servers.0>basePath</servers.0><^servers.0>null</servers.0><^usePromises>, callback</usePromises><#detectAmznApiGatewayExtensions>,
+        accessKey, secretKey</detectAmznApiGatewayExtensions>
       );
     }
 <#usePromises>

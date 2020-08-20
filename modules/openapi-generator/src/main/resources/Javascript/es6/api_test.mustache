@@ -45,6 +45,20 @@
         //  if (error) throw error;
         //expect().to.be();
         //});
+{{#detectAmznApiGatewayExtensions}}
+        //uncomment below to make sigv4 signed calls to API
+        //var api = new DefaultApi();
+        //var callback = function(error, data, response) {
+        //  if (error) {
+        //    console.error(error);
+        //  } else {
+        //    console.log('API called successfully. Returned data: ', data);
+        //  }
+        //};
+        //api.{{operationId}}(callback);
+        //uncomment below to provide credentials for signed call
+        //api.{{operationId}}(callback, "{ACCESS_KEY}", "{SECRET_KEY}");
+{{/detectAmznApiGatewayExtensions}}
         done();
       });
     });

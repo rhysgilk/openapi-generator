@@ -100,6 +100,21 @@ module: {
   ]
 }
 ```
+{{#detectAmznApiGatewayExtensions}}
+## SigV4 Signing
+
+Install the following to make signed calls:
+```shell
+npm install aws-sdk
+npm install aws4
+```
+
+Add the following imports to the ApiClient file:
+```shell
+import AWS from "{PATH_TO_CLIENT}/node_modules/aws-sdk/lib/core.js";
+import aws4 from "{PATH_TO_CLIENT}/node_modules/aws4/aws4.js";
+```
+{{/detectAmznApiGatewayExtensions}}
 
 ## Getting Started
 
