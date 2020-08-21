@@ -148,7 +148,6 @@ class PetApi(object):
 
         header_params = {}
 
-
         form_params = []
         local_var_files = {}
 
@@ -288,7 +287,6 @@ class PetApi(object):
         if 'api_key' in local_var_params:
             header_params['api_key'] = local_var_params['api_key']  # noqa: E501
 
-
         form_params = []
         local_var_files = {}
 
@@ -416,7 +414,6 @@ class PetApi(object):
             collection_formats['status'] = 'csv'  # noqa: E501
 
         header_params = {}
-
 
         form_params = []
         local_var_files = {}
@@ -550,7 +547,6 @@ class PetApi(object):
 
         header_params = {}
 
-
         form_params = []
         local_var_files = {}
 
@@ -681,7 +677,6 @@ class PetApi(object):
         query_params = []
 
         header_params = {}
-
 
         form_params = []
         local_var_files = {}
@@ -822,7 +817,6 @@ class PetApi(object):
         query_params = []
 
         header_params = {}
-
 
         form_params = []
         local_var_files = {}
@@ -966,7 +960,6 @@ class PetApi(object):
 
         header_params = {}
 
-
         form_params = []
         local_var_files = {}
         if 'name' in local_var_params:
@@ -1109,7 +1102,6 @@ class PetApi(object):
         query_params = []
 
         header_params = {}
-
 
         form_params = []
         local_var_files = {}
@@ -1261,7 +1253,6 @@ class PetApi(object):
         query_params = []
 
         header_params = {}
-
 
         form_params = []
         local_var_files = {}

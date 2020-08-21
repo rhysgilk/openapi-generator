@@ -26,7 +26,6 @@ Then import the package:
 import petstore_api
 ```
 
-
 ### Setuptools
 
 Install via [Setuptools](http://pypi.python.org/pypi/setuptools).

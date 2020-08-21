@@ -137,7 +137,6 @@ class FakeClassnameTags123Api(object):
 
         header_params = {}
 
-
         form_params = []
         local_var_files = {}
 

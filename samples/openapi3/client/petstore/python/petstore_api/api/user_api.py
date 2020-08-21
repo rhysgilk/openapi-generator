@@ -137,7 +137,6 @@ class UserApi(object):
 
         header_params = {}
 
-
         form_params = []
         local_var_files = {}
 
@@ -267,7 +266,6 @@ class UserApi(object):
 
         header_params = {}
 
-
         form_params = []
         local_var_files = {}
 
@@ -396,7 +394,6 @@ class UserApi(object):
         query_params = []
 
         header_params = {}
-
 
         form_params = []
         local_var_files = {}
@@ -531,7 +528,6 @@ class UserApi(object):
 
         header_params = {}
 
-
         form_params = []
         local_var_files = {}
 
@@ -656,7 +652,6 @@ class UserApi(object):
         query_params = []
 
         header_params = {}
-
 
         form_params = []
         local_var_files = {}
@@ -798,7 +793,6 @@ class UserApi(object):
 
         header_params = {}
 
-
         form_params = []
         local_var_files = {}
 
@@ -916,7 +910,6 @@ class UserApi(object):
         query_params = []
 
         header_params = {}
-
 
         form_params = []
         local_var_files = {}
@@ -1053,7 +1046,6 @@ class UserApi(object):
         query_params = []
 
         header_params = {}
-
 
         form_params = []
         local_var_files = {}

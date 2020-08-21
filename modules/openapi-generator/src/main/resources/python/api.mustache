@@ -228,8 +228,8 @@ class {{classname}}(object):
             header_params['{{baseName}}'] = local_var_params['{{paramName}}']{{#isListContainer}}  # noqa: E501
             collection_formats['{{baseName}}'] = '{{collectionFormat}}'{{/isListContainer}}  # noqa: E501
 {{/headerParams}}
-
 {{#detectAmznApiGatewayExtensions}}
+
         region = None
         access_key = None
         secret_key = None

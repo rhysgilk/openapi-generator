@@ -137,7 +137,6 @@ class AnotherFakeApi(object):
 
         header_params = {}
 
-
         form_params = []
         local_var_files = {}
 

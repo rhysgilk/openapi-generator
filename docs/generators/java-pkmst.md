@@ -50,7 +50,6 @@ sidebar_label: java-pkmst
 |sourceFolder|source folder for generated code| |src/main/java|
 |springBootAdminUri|Spring-Boot URI| |null|
 |title|server title name or client service name| |null|
-|withAWSV4Signature|whether to include support for SigV4 signing| |false|
 |withXml|whether to include support for application/xml content type and include XML annotations in the model (works with libraries that provide support for JSON and XML)| |false|
 |zipkinUri|Zipkin URI| |null|
 

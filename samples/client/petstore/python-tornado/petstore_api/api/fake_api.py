@@ -137,7 +137,6 @@ class FakeApi(object):
 
         header_params = {}
 
-
         form_params = []
         local_var_files = {}
 
@@ -264,7 +263,6 @@ class FakeApi(object):
         query_params = []
 
         header_params = {}
-
 
         form_params = []
         local_var_files = {}
@@ -393,7 +391,6 @@ class FakeApi(object):
 
         header_params = {}
 
-
         form_params = []
         local_var_files = {}
 
@@ -521,7 +518,6 @@ class FakeApi(object):
 
         header_params = {}
 
-
         form_params = []
         local_var_files = {}
 
@@ -648,7 +644,6 @@ class FakeApi(object):
         query_params = []
 
         header_params = {}
-
 
         form_params = []
         local_var_files = {}
@@ -780,7 +775,6 @@ class FakeApi(object):
         query_params = []
 
         header_params = {}
-
 
         form_params = []
         local_var_files = {}
@@ -922,7 +916,6 @@ class FakeApi(object):
 
         header_params = {}
 
-
         form_params = []
         local_var_files = {}
 
@@ -1053,7 +1046,6 @@ class FakeApi(object):
         query_params = []
 
         header_params = {}
-
 
         form_params = []
         local_var_files = {}
@@ -1295,7 +1287,6 @@ class FakeApi(object):
 
         header_params = {}
 
-
         form_params = []
         local_var_files = {}
         if 'integer' in local_var_params:
@@ -1498,7 +1489,6 @@ class FakeApi(object):
         if 'enum_header_string' in local_var_params:
             header_params['enum_header_string'] = local_var_params['enum_header_string']  # noqa: E501
 
-
         form_params = []
         local_var_files = {}
         if 'enum_form_string_array' in local_var_params:
@@ -1678,7 +1668,6 @@ class FakeApi(object):
         if 'boolean_group' in local_var_params:
             header_params['boolean_group'] = local_var_params['boolean_group']  # noqa: E501
 
-
         form_params = []
         local_var_files = {}
 
@@ -1801,7 +1790,6 @@ class FakeApi(object):
         query_params = []
 
         header_params = {}
-
 
         form_params = []
         local_var_files = {}
@@ -1940,7 +1928,6 @@ class FakeApi(object):
         query_params = []
 
         header_params = {}
-
 
         form_params = []
         local_var_files = {}
@@ -2125,7 +2112,6 @@ class FakeApi(object):
             collection_formats['context'] = 'multi'  # noqa: E501
 
         header_params = {}
-
 
         form_params = []
         local_var_files = {}

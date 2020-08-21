@@ -139,7 +139,6 @@ class StoreApi(object):
 
         header_params = {}
 
-
         form_params = []
         local_var_files = {}
 
@@ -255,7 +254,6 @@ class StoreApi(object):
         query_params = []
 
         header_params = {}
-
 
         form_params = []
         local_var_files = {}
@@ -392,7 +390,6 @@ class StoreApi(object):
 
         header_params = {}
 
-
         form_params = []
         local_var_files = {}
 
@@ -519,7 +516,6 @@ class StoreApi(object):
         query_params = []
 
         header_params = {}
-
 
         form_params = []
         local_var_files = {}
