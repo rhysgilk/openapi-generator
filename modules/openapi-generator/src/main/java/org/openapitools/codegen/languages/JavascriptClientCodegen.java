@@ -83,6 +83,7 @@ public class JavascriptClientCodegen extends DefaultCodegen implements CodegenCo
     protected boolean usePromises;
     protected boolean emitModelMethods;
     protected boolean emitJSDoc = true;
+    protected boolean detectAmznApiGatewayExtensions;
     protected String apiDocPath = "docs/";
     protected String modelDocPath = "docs/";
     protected String apiTestPath = "api/";
@@ -275,6 +276,10 @@ public class JavascriptClientCodegen extends DefaultCodegen implements CodegenCo
         if (additionalProperties.containsKey(NPM_REPOSITORY)) {
             setNpmRepository(((String) additionalProperties.get(NPM_REPOSITORY)));
         }
+        if (additionalProperties.containsKey(CodegenConstants.DETECT_AMZN_APIGATEWAY_EXTENSIONS)) {
+            detectAmznApiGatewayExtensions =
+                    Boolean.valueOf(additionalProperties.get(CodegenConstants.DETECT_AMZN_APIGATEWAY_EXTENSIONS).toString());
+        }
     }
 
     @Override
@@ -339,6 +344,7 @@ public class JavascriptClientCodegen extends DefaultCodegen implements CodegenCo
         additionalProperties.put(EMIT_JS_DOC, emitJSDoc);
         additionalProperties.put(USE_ES6, useES6);
         additionalProperties.put(NPM_REPOSITORY, npmRepository);
+        additionalProperties.put(CodegenConstants.DETECT_AMZN_APIGATEWAY_EXTENSIONS, detectAmznApiGatewayExtensions);
 
         // make api and model doc path available in mustache template
         additionalProperties.put("apiDocPath", apiDocPath);
