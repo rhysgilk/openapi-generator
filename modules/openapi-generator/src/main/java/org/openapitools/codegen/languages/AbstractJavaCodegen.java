@@ -55,7 +55,6 @@ public abstract class AbstractJavaCodegen extends DefaultCodegen implements Code
     public static final String DATE_LIBRARY = "dateLibrary";
     public static final String JAVA8_MODE = "java8";
     public static final String SUPPORT_ASYNC = "supportAsync";
-    public static final String WITH_AWSV4_SIGNATURE = "withAWSV4Signature";
     public static final String WITH_XML = "withXml";
     public static final String SUPPORT_JAVA6 = "supportJava6";
     public static final String DISABLE_HTML_ESCAPING = "disableHtmlEscaping";
@@ -66,7 +65,6 @@ public abstract class AbstractJavaCodegen extends DefaultCodegen implements Code
     protected String dateLibrary = "threetenbp";
     protected boolean supportAsync = false;
     protected boolean java8Mode = true;
-    protected boolean withAWSV4Signature = false;
     protected boolean withXml = false;
     protected String invokerPackage = "org.openapitools";
     protected String groupId = "org.openapitools";
@@ -198,7 +196,6 @@ public abstract class AbstractJavaCodegen extends DefaultCodegen implements Code
         cliOptions.add(CliOption.newBoolean(FULL_JAVA_UTIL, "whether to use fully qualified name for classes under java.util. This option only works for Java API client", fullJavaUtil));
         cliOptions.add(CliOption.newBoolean(DISCRIMINATOR_CASE_SENSITIVE, "Whether the discriminator value lookup should be case-sensitive or not. This option only works for Java API client", discriminatorCaseSensitive));
         cliOptions.add(CliOption.newBoolean(CodegenConstants.HIDE_GENERATION_TIMESTAMP, CodegenConstants.HIDE_GENERATION_TIMESTAMP_DESC, this.isHideGenerationTimestamp()));
-        cliOptions.add(CliOption.newBoolean(WITH_AWSV4_SIGNATURE, "whether to include support for SigV4 signing"));
         cliOptions.add(CliOption.newBoolean(WITH_XML, "whether to include support for application/xml content type and include XML annotations in the model (works with libraries that provide support for JSON and XML)"));
 
         CliOption dateLibrary = new CliOption(DATE_LIBRARY, "Option. Date library to use").defaultValue(this.getDateLibrary());
@@ -410,11 +407,6 @@ public abstract class AbstractJavaCodegen extends DefaultCodegen implements Code
         additionalProperties.put(FULL_JAVA_UTIL, fullJavaUtil);
         additionalProperties.put("javaUtilPrefix", javaUtilPrefix);
 
-        if (additionalProperties.containsKey(WITH_AWSV4_SIGNATURE)) {
-            this.setWithAWSV4Signature(Boolean.valueOf(additionalProperties.get(WITH_AWSV4_SIGNATURE).toString()));
-        }
-        additionalProperties.put(WITH_AWSV4_SIGNATURE, withAWSV4Signature);
-
         if (additionalProperties.containsKey(WITH_XML)) {
             this.setWithXml(Boolean.valueOf(additionalProperties.get(WITH_XML).toString()));
         }
@@ -506,13 +498,6 @@ public abstract class AbstractJavaCodegen extends DefaultCodegen implements Code
             setSupportAsync(Boolean.parseBoolean(additionalProperties.get(SUPPORT_ASYNC).toString()));
             if (supportAsync) {
                 additionalProperties.put(SUPPORT_ASYNC, "true");
-            }
-        }
-
-        if (additionalProperties.containsKey(WITH_AWSV4_SIGNATURE)) {
-            setWithAWSV4Signature(Boolean.parseBoolean(additionalProperties.get(WITH_AWSV4_SIGNATURE).toString()));
-            if (withAWSV4Signature) {
-                additionalProperties.put(WITH_AWSV4_SIGNATURE, "true");
             }
         }
 
@@ -1481,8 +1466,6 @@ public abstract class AbstractJavaCodegen extends DefaultCodegen implements Code
     public void setDiscriminatorCaseSensitive(boolean discriminatorCaseSensitive) {
         this.discriminatorCaseSensitive = discriminatorCaseSensitive;
     }
-
-    public void setWithAWSV4Signature (boolean withAWSV4Signature) { this.withAWSV4Signature = withAWSV4Signature; }
 
     public void setWithXml(boolean withXml) {
         this.withXml = withXml;

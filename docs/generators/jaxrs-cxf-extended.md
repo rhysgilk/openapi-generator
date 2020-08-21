@@ -70,7 +70,6 @@ sidebar_label: jaxrs-cxf-extended
 |useSwaggerFeature|Use Swagger Feature| |false|
 |useSwaggerUI|Use Swagger UI| |false|
 |useWadlFeature|Use WADL Feature| |false|
-|withAWSV4Signature|whether to include support for SigV4 signing| |false|
 |withXml|whether to include support for application/xml content type and include XML annotations in the model (works with libraries that provide support for JSON and XML)| |false|
 
 ## IMPORT MAPPING
