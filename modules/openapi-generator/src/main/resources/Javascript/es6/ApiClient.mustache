@@ -419,15 +419,15 @@ class ApiClient {
         // Set credentials to null if user is not providing
         var credentials = null;
         if (accessKey !== undefined && secretKey !== undefined){
-        // Override credentials that user has provided
-        credentials = new AWS.Credentials(accessKey, secretKey);
+            // Override credentials that user has provided
+            credentials = new AWS.Credentials(accessKey, secretKey);
         }
 
         var opts = { host: host, path: fullPath};
         aws4.sign(opts, credentials);
         request.header = this.normalizeParams(opts.headers);
-    {{/detectAmznApiGatewayExtensions}}
 
+    {{/detectAmznApiGatewayExtensions}}
         // set header parameters
         request.set(this.defaultHeaders).set(this.normalizeParams(headerParams));
 
