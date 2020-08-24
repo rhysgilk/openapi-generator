@@ -411,19 +411,17 @@ class ApiClient {
 
     {{#detectAmznApiGatewayExtensions}}
         // Retrieve host from baseURL and full path from baseURL + path
-        var host = this.basePath.substring(8);
-        var fullPath = host.substring(host.indexOf('/') + 1);
-        host = host.substring( 0, host.indexOf( fullPath ) - 1);
-        fullPath += path;
+        var adr = URLS.parse(this.basePath, true);
+        var fullPath = adr.path.substring(1) + path;
 
         // Set credentials to null if user is not providing
         var credentials = null;
-        if (accessKey !== undefined && secretKey !== undefined){
+        if (accessKey && secretKey){
             // Override credentials that user has provided
             credentials = new AWS.Credentials(accessKey, secretKey);
         }
 
-        var opts = { host: host, path: fullPath};
+        var opts = { host: adr.host, path: fullPath};
         aws4.sign(opts, credentials);
         request.header = this.normalizeParams(opts.headers);
 
