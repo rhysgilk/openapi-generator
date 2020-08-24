@@ -412,7 +412,10 @@ class ApiClient {
     {{#detectAmznApiGatewayExtensions}}
         // Retrieve host from baseURL and full path from baseURL + path
         var adr = URLS.parse(this.basePath, true);
-        var fullPath = adr.path.substring(1) + path;
+        var fullPath = path;
+        if (adr.path) {
+            var fullPath = adr.path.substring(1) + path;
+        }
 
         // Set credentials to null if user is not providing
         var credentials = null;
