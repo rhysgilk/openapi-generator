@@ -424,7 +424,7 @@ class ApiClient {
             credentials = new AWS.Credentials(accessKey, secretKey);
         }
 
-        var opts = { host: adr.host, path: fullPath };
+        var opts = { host: adr.host, path: fullPath};
         aws4.sign(opts, credentials);
         request.header = this.normalizeParams(opts.headers);
 
