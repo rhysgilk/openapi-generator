@@ -414,7 +414,7 @@ class ApiClient {
         var adr = URLS.parse(this.basePath, true);
         var fullPath = path;
         if (adr.path) {
-            var fullPath = adr.path.substring(1) + path;
+            fullPath = adr.path.substring(1) + path;
         }
 
         // Set credentials to null if user is not providing
@@ -424,7 +424,7 @@ class ApiClient {
             credentials = new AWS.Credentials(accessKey, secretKey);
         }
 
-        var opts = { host: adr.host, path: fullPath};
+        var opts = { host: adr.host, path: fullPath };
         aws4.sign(opts, credentials);
         request.header = this.normalizeParams(opts.headers);
 
