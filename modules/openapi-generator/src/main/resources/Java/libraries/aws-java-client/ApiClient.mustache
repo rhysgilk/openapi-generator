@@ -1,0 +1,570 @@
+{{>licenseInfo}}
+
+package {{invokerPackage}};
+
+{{#joda}}
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+import org.joda.time.format.DateTimeFormatter;
+{{/joda}}
+{{#threetenbp}}
+import org.threeten.bp.LocalDate;
+import org.threeten.bp.OffsetDateTime;
+import org.threeten.bp.format.DateTimeFormatter;
+{{/threetenbp}}
+{{#hasOAuthMethods}}
+import org.apache.oltu.oauth2.client.request.OAuthClientRequest.TokenRequestBuilder;
+import org.apache.oltu.oauth2.common.message.types.GrantType;
+{{/hasOAuthMethods}}
+
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
+import java.net.URI;
+import java.net.URLEncoder;
+
+{{#java8}}
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
+{{/java8}}
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Scanner;
+
+import com.amazonaws.AmazonClientException;
+import com.amazonaws.ClientConfiguration;
+import com.amazonaws.DefaultRequest;
+import com.amazonaws.Request;
+import com.amazonaws.Response;
+import com.amazonaws.SdkBaseException;
+import com.amazonaws.auth.AWS4Signer;
+import com.amazonaws.auth.AWSCredentialsProviderChain;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
+import com.amazonaws.http.AmazonHttpClient;
+import com.amazonaws.http.ExecutionContext;
+import com.amazonaws.http.HttpMethodName;
+import com.amazonaws.http.HttpResponse;
+import com.amazonaws.http.HttpResponseHandler;
+
+{{#hasOAuthMethods}}
+import {{invokerPackage}}.auth.OAuth;
+import {{invokerPackage}}.auth.RetryingOAuth;
+import {{invokerPackage}}.auth.OAuthFlow;
+{{/hasOAuthMethods}}
+
+public class ApiClient {
+
+    private String basePath = "{{{basePath}}}";
+    private boolean debugging = false;
+    private Map<String, String> defaultHeaderMap = new HashMap<String, String>();
+
+    private boolean verifyingSsl;
+
+    private AmazonHttpClient httpClient;
+    private JSON json;
+
+    private BasicAWSCredentials credentials;
+    private String region;
+    private String service;
+    private String path;
+    private String method;
+    private List<Pair> queryParams;
+    private List<Pair> collectionQueryParams;
+
+    /*
+     * Basic constructor for ApiClient
+     */
+    public ApiClient() {
+        init();
+    }
+
+    /*
+     * Basic constructor with custom AmazonHttpClient
+     */
+    public ApiClient(AmazonHttpClient client) {
+        init();
+    }
+
+    private void init() {
+        verifyingSsl = true;
+
+        json = new JSON();
+
+        // Set default User-Agent.
+        setUserAgent("{{#httpUserAgent}}{{{.}}}{{/httpUserAgent}}{{^httpUserAgent}}OpenAPI-Generator/{{{artifactVersion}}}/java{{/httpUserAgent}}");
+
+        setSigningParams();
+    }
+
+    /**
+    * Sets up credentials and sets default values for signing
+    *
+    *
+    */
+    private void setSigningParams() {
+        // Read default credentials
+        AWSCredentialsProviderChain credProvider = DefaultAWSCredentialsProviderChain.getInstance();
+        this.credentials = new BasicAWSCredentials(credProvider.getCredentials().getAWSAccessKeyId(),
+                                                   credProvider.getCredentials().getAWSSecretKey());
+
+        this.region = "";
+        this.service = "execute-api";
+        this.method = "GET";
+        this.path = "";
+        this.queryParams = null;
+        this.collectionQueryParams = null;
+    }
+
+    /**
+    * Set path
+    *
+    * @param path Path of the URL
+    */
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    /**
+    * Set method
+    *
+    * @param method Method for invoking
+    */
+    public void setMethod(String method) {
+        this.method = method;
+    }
+
+    /**
+     * Set base path
+     *
+     * @param basePath Base path of the URL (e.g {{{basePath}}}
+     * @return An instance of AmazonHttpClient
+     */
+    public ApiClient setBasePath(String basePath) {
+        this.basePath = basePath;
+        return this;
+    }
+
+    /**
+     * Set the User-Agent header's value (by adding to the default header map).
+     *
+     * @param userAgent HTTP request's user agent
+     * @return ApiClient
+     */
+    public ApiClient setUserAgent(String userAgent) {
+        addDefaultHeader("User-Agent", userAgent);
+        return this;
+    }
+
+    /**
+     * Add a default header.
+     *
+     * @param key The header's key
+     * @param value The header's value
+     * @return ApiClient
+     */
+    public ApiClient addDefaultHeader(String key, String value) {
+        defaultHeaderMap.put(key, value);
+        return this;
+    }
+
+    /**
+     * Format the given parameter object into string.
+     *
+     * @param param Parameter
+     * @return String representation of the parameter
+     */
+    public String parameterToString(Object param) {
+        if (param == null) {
+            return "";
+        } else if (param instanceof Date {{#joda}}|| param instanceof DateTime || param instanceof LocalDate{{/joda}}{{#jsr310}}|| param instanceof OffsetDateTime || param instanceof LocalDate{{/jsr310}}) {
+            //Serialize to json string and remove the " enclosing characters
+            String jsonStr = json.serialize(param);
+            return jsonStr.substring(1, jsonStr.length() - 1);
+        } else if (param instanceof Collection) {
+            StringBuilder b = new StringBuilder();
+            for (Object o : (Collection) param) {
+                if (b.length() > 0) {
+                    b.append(",");
+                }
+                b.append(String.valueOf(o));
+            }
+            return b.toString();
+        } else {
+            return String.valueOf(param);
+        }
+    }
+
+    /**
+     * Check if the given MIME is a JSON MIME.
+     * JSON MIME examples:
+     *   application/json
+     *   application/json; charset=UTF8
+     *   APPLICATION/JSON
+     *   application/vnd.company+json
+     * "* / *" is also default to JSON
+     * @param mime MIME (Multipurpose Internet Mail Extensions)
+     * @return True if the given MIME is JSON, false otherwise.
+     */
+    public boolean isJsonMime(String mime) {
+        String jsonMime = "(?i)^(application/json|[^;/ \t]+/[^;/ \t]+[+]json)[ \t]*(;.*)?$";
+        return mime != null && (mime.matches(jsonMime) || mime.equals("*/*"));
+    }
+
+    /**
+     * Select the Accept header's value from the given accepts array:
+     *   if JSON exists in the given array, use it;
+     *   otherwise use all of them (joining into a string)
+     *
+     * @param accepts The accepts array to select from
+     * @return The Accept header to use. If the given array is empty,
+     *   null will be returned (not to set the Accept header explicitly).
+     */
+    public String selectHeaderAccept(String[] accepts) {
+        if (accepts.length == 0) {
+            return null;
+        }
+        for (String accept : accepts) {
+            if (isJsonMime(accept)) {
+                return accept;
+            }
+        }
+        return StringUtil.join(accepts, ",");
+    }
+
+    /**
+     * Select the Content-Type header's value from the given array:
+     *   if JSON exists in the given array, use it;
+     *   otherwise use the first one of the array.
+     *
+     * @param contentTypes The Content-Type array to select from
+     * @return The Content-Type header to use. If the given array is empty,
+     *   or matches "any", JSON will be used.
+     */
+    public String selectHeaderContentType(String[] contentTypes) {
+        if (contentTypes.length == 0 || contentTypes[0].equals("*/*")) {
+            return "application/json";
+        }
+        for (String contentType : contentTypes) {
+            if (isJsonMime(contentType)) {
+                return contentType;
+            }
+        }
+        return contentTypes[0];
+    }
+
+    /**
+     * Escape the given string to be used as URL query value.
+     *
+     * @param str String to be escaped
+     * @return Escaped string
+     */
+    public String escapeString(String str) {
+        try {
+            return URLEncoder.encode(str, "utf8").replaceAll("\\+", "%20");
+        } catch (UnsupportedEncodingException e) {
+            return str;
+        }
+    }
+
+    /**
+    * Deserialize response body to Java object, according to the return type and
+    * the Content-Type response header.
+    *
+    * @param <T> Type
+    * @param response HTTP response
+    * @param returnType The type of the Java object
+    * @return The deserialized Java object
+    * @throws ApiException If fail to deserialize response body, i.e. cannot read response body
+    *   or the Content-Type of the response is not supported.
+    */
+    public <T> T deserialize(HttpResponse response, Type returnType) throws ApiException {
+        if (response == null || returnType == null) {
+            return null;
+        }
+
+        if ("byte[]".equals(returnType.toString())) {
+            // Handle binary response (byte array).
+            return (T) response.getContent().toString();
+        }
+
+        String respBody;
+        if (response.getContent() != null)
+            respBody = response.getContent().toString();
+        else
+            respBody = null;
+
+        if (respBody == null || "".equals(respBody)) {
+            return null;
+        }
+        String contentType = response.getHeaders().get("Content-Type");
+        if (contentType == null) {
+            // ensuring a default content type
+            contentType = "application/json";
+        }
+        if (isJsonMime(contentType)) {
+            return json.deserialize(respBody, returnType);
+        } else if (returnType.equals(String.class)) {
+            // Expecting string, return the raw response body.
+            return (T) respBody;
+        } else {
+            throw new ApiException(
+                "Content type \"" + contentType + "\" is not supported for type: " + returnType,
+                response.getStatusCode(),
+                response.getHeaders(),
+                respBody);
+        }
+    }
+
+    /**
+    * Handle the given response, return the deserialized object when the response is successful.
+    *
+    * @param <T> Type
+    * @param response Response
+    * @param returnType Return type
+    * @return Type
+    * @throws ApiException If the response has an unsuccessful status code or
+    *                      fail to deserialize the response body
+    */
+    public <T> T handleResponse(HttpResponse response, Type returnType) throws ApiException {
+        if (response.getStatusCode() >= 200 && response.getStatusCode() <= 299) {
+            if (returnType == null || response.getStatusCode() == 204) {
+                // returning null if the returnType is not defined,
+                // or the status code is 204 (No Content)
+                if (response.getContent() != null) {
+                    try {
+                        response.getContent().close();
+                    } catch (Exception e) {
+                    throw new ApiException(response.getStatusText(), e, response.getStatusCode(), response.getHeaders());
+                }
+            }
+            return null;
+            } else {
+                return deserialize(response, returnType);
+            }
+        } else {
+            String respBody = null;
+            if (response.getContent() != null) {
+                respBody = response.getContent().toString();
+            }
+            throw new ApiException(response.getStatusText(), response.getStatusCode(), response.getHeaders(), respBody);
+        }
+    }
+
+    /**
+    * Set queryParams for a signed call to API
+    *
+    * @param queryParams The region of the API being invoked
+    */
+    public void setQueryParams(List<Pair> queryParams) {
+        this.queryParams = queryParams;
+    }
+
+    /**
+    * Set collectionQueryParams for a signed call to API
+    *
+    * @param collectionQueryParams The region of the API being invoked
+    */
+    public void setCollectionQueryParams(List<Pair> collectionQueryParams) {
+        this.collectionQueryParams = collectionQueryParams;
+    }
+
+    private class SimpleAwsErrorHandler implements HttpResponseHandler<SdkBaseException> {
+        @Override
+        public AmazonClientException handle(HttpResponse response) throws Exception {
+            try {
+                handleResponse(response, null);
+            } catch (Exception e){
+                throw new ApiException(response.getStatusText(), e, response.getStatusCode(), response.getHeaders());
+            }
+            String toThrow = response.getStatusCode() + " " + response.getStatusText() + "\n" + response.getHeaders();
+            AmazonClientException er = new AmazonClientException(toThrow);
+            return er;
+        }
+        @Override
+        public boolean needsConnectionLeftOpen() {
+            return false;
+        }
+    }
+
+    /**
+    * Build HTTP call with the given options.
+    *
+    * @param path The sub-path of the HTTP URL
+    * @param method The request method, one of "GET", "HEAD", "OPTIONS", "POST", "PUT", "PATCH" and "DELETE"
+    * @param queryParam The query parameters
+    * @param collectionQueryParams The collection query parameters
+    * @param accessKey The accessKey for the signing process
+    * @param secretKey The secretKey for the signing process
+    * @param region The region for the signing process
+    * @return The HTTP call
+    * @throws ApiException If fail to serialize the request body object
+    */
+    public Response buildCallWithParams(String path, String method, List<Pair> queryParam, List<Pair> collectionQueryParams,
+                                        String accessKey, String secretKey, String region) throws ApiException {
+        Request apiRequest = buildRequestWithParams(path, method, queryParam, collectionQueryParams, accessKey, secretKey, region);
+        return newCall(apiRequest);
+    }
+
+    /**
+    * Build HTTP call with the given options.
+    *
+    * @param path The sub-path of the HTTP URL
+    * @param method The request method, one of "GET", "HEAD", "OPTIONS", "POST", "PUT", "PATCH" and "DELETE"
+    * @param queryParam The query parameters
+    * @param collectionQueryParams The collection query parameters
+    * @return The HTTP call
+    * @throws ApiException If fail to serialize the request body object
+    */
+    public Response buildCall(String path, String method, List<Pair> queryParam, List<Pair> collectionQueryParams) throws ApiException {
+        Request apiRequest = buildRequest(path, method, queryParam, collectionQueryParams);
+        return newCall(apiRequest);
+    }
+
+    /**
+    * Makes call to API and returns the Response
+    *
+    * @param apiRequest The request to the API
+    * @return The Response from the API
+    */
+    private Response newCall(Request apiRequest) {
+        Response response = new AmazonHttpClient(new ClientConfiguration())
+            .requestExecutionBuilder()
+            .executionContext(new ExecutionContext(true))
+            .request(apiRequest)
+            .errorResponseHandler(new SimpleAwsErrorHandler())
+            .execute(new HttpResponseHandler<String>() {
+                @Override
+                public String handle(HttpResponse response) throws Exception {
+                    String fromHttp = "";
+                    Scanner requestStream = new Scanner(response.getContent());
+                    while (requestStream.hasNext()) {
+                        fromHttp += requestStream.nextLine() + "\n";
+                    }
+                    return fromHttp;
+                }
+                @Override
+                public boolean needsConnectionLeftOpen() {
+                    return false;
+                }
+            });
+        return response;
+    }
+
+    /**
+    * Build an HTTP request with the given options.
+    *
+    * @param path The sub-path of the HTTP URL
+    * @param method The request method, one of "GET", "HEAD", "OPTIONS", "POST", "PUT", "PATCH" and "DELETE"
+    * @param queryParams The query parameters
+    * @param collectionQueryParams The collection query parameters
+    * @return The HTTP request
+    * @throws ApiException If fail to serialize the request body object
+    */
+    private Request buildRequest(String path, String method, List<Pair> queryParams, List<Pair> collectionQueryParams) throws ApiException {
+        final String url = buildUrl(path, queryParams, collectionQueryParams);
+
+        // Creating Request
+        Request apiRequest = new DefaultRequest<>("");
+        apiRequest.setHttpMethod(HttpMethodName.valueOf(method));
+
+        apiRequest.setEndpoint(URI.create(url));
+        apiRequest = signRequest(apiRequest);
+
+        return apiRequest;
+    }
+
+    /**
+    * Build an HTTP request with the given options.
+    *
+    * @param path The sub-path of the HTTP URL
+    * @param method The request method, one of "GET", "HEAD", "OPTIONS", "POST", "PUT", "PATCH" and "DELETE"
+    * @param queryParams The query parameters
+    * @param collectionQueryParams The collection query parameters
+    * @return The HTTP request
+    * @throws ApiException If fail to serialize the request body object
+    */
+    private Request buildRequestWithParams(String path, String method, List<Pair> queryParams, List<Pair> collectionQueryParams,
+                                           String accessKey, String secretKey, String region) throws ApiException {
+        final String url = buildUrl(path, queryParams, collectionQueryParams);
+        this.credentials = new BasicAWSCredentials(accessKey, secretKey);
+        this.region = region;
+
+        // Creating Request
+        Request apiRequest = new DefaultRequest<>("");
+        apiRequest.setHttpMethod(HttpMethodName.valueOf(method));
+
+        apiRequest.setEndpoint(URI.create(url));
+        apiRequest = signRequest(apiRequest);
+
+        return apiRequest;
+    }
+
+    /**
+    * Build an HTTP request with the given options.
+    *
+    * @param apiRequest The Request to the API which needs to be signed
+    * @return A signed Request
+    */
+    private Request signRequest(Request apiRequest) {
+        AWS4Signer signer = new AWS4Signer();
+        if (!("".equals(this.region))) {
+            signer.setRegionName(this.region);
+        }
+        signer.setServiceName(this.service);
+        signer.sign(apiRequest, this.credentials);
+        return apiRequest;
+    }
+
+    /**
+     * Build full URL by concatenating base path, the given sub path and query parameters.
+     *
+     * @param path The sub path
+     * @param queryParams The query parameters
+     * @param collectionQueryParams The collection query parameters
+     * @return The full URL
+     */
+    private String buildUrl(String path, List<Pair> queryParams, List<Pair> collectionQueryParams) {
+        final StringBuilder url = new StringBuilder();
+        url.append(basePath).append(path);
+
+        if (queryParams != null && !queryParams.isEmpty()) {
+            // support (constant) query string in `path`, e.g. "/posts?draft=1"
+            String prefix = path.contains("?") ? "&" : "?";
+            for (Pair param : queryParams) {
+                if (param.getValue() != null) {
+                    if (prefix != null) {
+                        url.append(prefix);
+                        prefix = null;
+                    } else {
+                        url.append("&");
+                    }
+                    String value = parameterToString(param.getValue());
+                    url.append(escapeString(param.getName())).append("=").append(escapeString(value));
+                }
+            }
+        }
+
+        if (collectionQueryParams != null && !collectionQueryParams.isEmpty()) {
+            String prefix = url.toString().contains("?") ? "&" : "?";
+            for (Pair param : collectionQueryParams) {
+                if (param.getValue() != null) {
+                    if (prefix != null) {
+                        url.append(prefix);
+                        prefix = null;
+                    } else {
+                        url.append("&");
+                    }
+                    String value = parameterToString(param.getValue());
+                    // collection query parameter value already escaped as part of parameterToPairs
+                    url.append(escapeString(param.getName())).append("=").append(value);
+                }
+            }
+        }
+        return url.toString();
+    }
+}

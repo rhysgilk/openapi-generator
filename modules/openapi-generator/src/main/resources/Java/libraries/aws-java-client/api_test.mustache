@@ -7,40 +7,32 @@ import {{invokerPackage}}.ApiException;
 {{/imports}}
 import org.junit.Test;
 import org.junit.Ignore;
-import org.junit.Assert;
 
 {{^fullJavaUtil}}
 {{/fullJavaUtil}}
+
 /**
  * API tests for {{classname}}
  */
+@Ignore
 public class {{classname}}Test {
 
     private final {{classname}} api = new {{classname}}();
 
-    {{#operations}}
-    {{#operation}}
+    {{#operations}}{{#operation}}
     /**
-    {{#summary}}
      * {{summary}}
      *
-    {{/summary}}
-    {{#notes}}
      * {{notes}}
      *
-    {{/notes}}
      * @throws ApiException
      *          if the Api call fails
      */
     @Test
     public void {{operationId}}Test() throws ApiException {
-        //{{#allParams}}
-        //{{{dataType}}} {{paramName}} = null;
-        //{{/allParams}}
-        //{{#returnType}}{{{returnType}}} response = {{/returnType}}api.{{operationId}}({{#allParams}}{{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}});
-
+        {{#returnType}}com.amazonaws.Response response = {{/returnType}}api.{{operationId}}({{#allParams}}{{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}});
+        System.out.println(response.getAwsResponse());
         // TODO: test validations
     }
-    {{/operation}}
-    {{/operations}}
+    {{/operation}}{{/operations}}
 }
