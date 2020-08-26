@@ -2,6 +2,9 @@
 
 import superagent from "superagent";
 import querystring from "querystring";
+import AWS from "aws-sdk";
+import aws4 from "aws4";
+import URLS from "url";
 
 {{#emitJSDoc}}/**
 * @module {{#invokerPackage}}{{invokerPackage}}/{{/invokerPackage}}ApiClient
