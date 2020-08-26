@@ -376,12 +376,17 @@ class ApiClient {
     {{^usePromises}}
     * @param {module:{{#invokerPackage}}{{invokerPackage}}/{{/invokerPackage}}ApiClient~callApiCallback} callback The callback function.
     {{/usePromises}}
+    {{#detectAmznApiGatewayExtensions}}
+    * @param {String} accessKey for SigV4 signing process
+    * @param {String} secretKey for SigV4 signing process
+    {{/detectAmznApiGatewayExtensions}}
     * @returns {{#usePromises}}{Promise} A {@link https://www.promisejs.org/|Promise} object{{/usePromises}}{{^usePromises}}{Object} The SuperAgent request object{{/usePromises}}.
     */
     {{/emitJSDoc}}
     callApi(path, httpMethod, pathParams,
         queryParams, headerParams, formParams, bodyParam, authNames, contentTypes, accepts,
-        returnType, apiBasePath{{^usePromises}}, callback{{/usePromises}}) {
+        returnType, apiBasePath{{^usePromises}}, callback{{/usePromises}}{{#detectAmznApiGatewayExtensions}},
+        accessKey, secretKey{{/detectAmznApiGatewayExtensions}}) {
 
         var url = this.buildUrl(path, pathParams, apiBasePath);
         var request = superagent(httpMethod, url);
@@ -404,6 +409,26 @@ class ApiClient {
 
         request.query(this.normalizeParams(queryParams));
 
+    {{#detectAmznApiGatewayExtensions}}
+        // Retrieve host from baseURL and full path from baseURL + path
+        var adr = URLS.parse(this.basePath, true);
+        var fullPath = path;
+        if (adr.path) {
+            fullPath = adr.path.substring(1) + path;
+        }
+
+        // Set credentials to null if user is not providing
+        var credentials = null;
+        if (accessKey && secretKey){
+            // Override credentials that user has provided
+            credentials = new AWS.Credentials(accessKey, secretKey);
+        }
+
+        var opts = { host: adr.host, path: fullPath};
+        aws4.sign(opts, credentials);
+        request.header = this.normalizeParams(opts.headers);
+
+    {{/detectAmznApiGatewayExtensions}}
         // set header parameters
         request.set(this.defaultHeaders).set(this.normalizeParams(headerParams));
 
